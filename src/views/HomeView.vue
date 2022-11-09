@@ -1,11 +1,13 @@
 <template>
     <div class="flex flex-col space-y-10">
-        <HeadingItemVue/>
-        <div class="flex flex-row justify-evenly px-[5%]">
-            <SellingBulletsVue/>
-            <HomeCTAVue/>
+        <HeadingItemVue />
+        <div class="flex flex-col justify-start px-[5%] qhd:px-[10%] lg:flex lg:flex-row lg:justify-evenly">
+            <SellingBulletsVue />
+            <HomeCTAVue />
         </div>
-        <UnsignedShortenerVue/>
+        <div class="flex flex-col justify-start px-[5%] qhd:px-[10%] lg:flex lg:flex-col lg:justify-evenly">
+            <UnsignedShortenerVue />
+        </div>
     </div>
 </template>
 

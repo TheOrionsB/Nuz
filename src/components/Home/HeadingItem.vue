@@ -1,6 +1,6 @@
 <template>
     <div class="pt-10 flex flex-col justify-center items-center">
-        <h1 class="text-5xl font-extrabold bg-gradient-to-r from-purple-300 to-purple-700 bg-clip-text text-transparent">{{greeting}}</h1>
+        <h1 class="lg:text-5xl text-3xl font-extrabold bg-gradient-to-r from-purple-300 to-purple-700 bg-clip-text text-transparent">{{greeting}}</h1>
     </div>
 </template>
 <script setup>
