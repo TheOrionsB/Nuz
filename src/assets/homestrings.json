@@ -1,0 +1,38 @@
+{
+    "motd": [
+        "Let's shorten it!",
+        "No url ?",
+        "It's a bit too long...",
+        "Ay ay captain!",
+        "Letzgongue",
+        "nuz.sh = perfect domain",
+        "Mom says she's proud",
+        "ahah encryption goes brrr"
+    ],
+    "bulletPoints": {
+        "bulletHeading": "Yet another url shortener but this time:",
+        "bulletPoints": [
+            {"bullet": "• Free"},
+            {"bullet": "• Anonymous"},
+            {"bullet": "• Password protected"},
+            {"bullet": "• Encrypted"},
+            {"bullet": "• With statistics"}
+        ]
+    },
+    "CTA": {
+        "mainCTA": "Get started with an account",
+        "subCTA": "Log in with an existing account"
+    },
+    "unsignedShortener": {
+        "usHeading": "Shorten without signing up!",
+        "usInputPlaceholder": "Your target URL",
+        "usSubmitValue": "Shorten now!"
+    },
+    "login": "Log in",
+    "signup": "Sign up",
+    "headerTitle": "Nuz",
+    "Navigation": [
+        {"pretty": "Home", "path": "/home"},
+        {"pretty": "About", "path": "/about"}
+    ]
+}

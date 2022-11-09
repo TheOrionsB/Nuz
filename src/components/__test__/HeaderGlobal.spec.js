@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import HeaderGlobalVue from '../HeaderGlobal.vue';
 import { describe, expect, it, vi } from "vitest";
-import { isReactive } from 'vue';
+import HomeStrings from '../../assets/homestrings.json';
 
 vi.mock('vue-router', () => ({
     resolve: vi.fn(),
@@ -10,10 +10,9 @@ vi.mock('vue-router', () => ({
 describe('HeaderGlobal', () => {
     it('Renders properly', () => {
         const wrapper = mount(HeaderGlobalVue);
-        expect(wrapper.text()).toContain("Nuz");
-        expect(wrapper.text()).toContain("About");
-        expect(wrapper.text()).toContain("Home");
-        expect(wrapper.text()).toContain("Log in");
-        expect(wrapper.text()).toContain("Sign up");
+        expect(wrapper.text()).toContain(HomeStrings.headerTitle);
+        for (let i in HomeStrings.Navigation.length) {
+            expect(wrapper.find(`a[key=${i}]`).text()).toContain(HomeStrings.Navigation[i].pretty);
+        }
     })
 })

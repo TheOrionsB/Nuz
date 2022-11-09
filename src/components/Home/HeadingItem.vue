@@ -4,11 +4,6 @@
     </div>
 </template>
 <script setup>
-import { defineProps } from 'vue'
-defineProps({
-    greeting: {
-        type: String,
-        default: "Let's shorten it!"
-    }
-})
+import HomeStrings from '../../assets/homestrings.json'
+const greeting = HomeStrings.motd[Math.round(Math.random() * (HomeStrings.motd.length - 1))];
 </script>

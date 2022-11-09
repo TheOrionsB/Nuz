@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import HeadingItemVue from '../../Home/HeadingItem.vue';
 import { describe, expect, it, vi } from "vitest";
-
+import HomeStrings from '../../../assets/homestrings.json';
 vi.mock('vue-router', () => ({
     resolve: vi.fn(),
 }));
@@ -9,16 +9,7 @@ vi.mock('vue-router', () => ({
 describe('HeadingItem', () => {
     it('Renders properly', () => {
         const wrapper = mount(HeadingItemVue)
-        expect(wrapper.text()).toContain("Let's shorten it!")
-    })
-    it('Renders the greeting passed as prop', () => {
-        const greet = "Hello vitest!"
-        const wrapper = mount(HeadingItemVue, {
-            props: {
-                greeting: greet
-            }
-        })
-        expect(wrapper.text()).toContain(greet)
+        expect(HomeStrings.motd).toContain(wrapper.text())
     })
 })
 
