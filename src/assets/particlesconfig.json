@@ -1,0 +1,37 @@
+{
+    "fpsLimit": 60,
+    "particles": {
+        "color": {
+            "value": "#ffffff"
+        },
+        "collisions": {
+            "enable": "true"
+        },
+        "move": {
+            "direction": "outside",
+            "enable": "true",
+            "outMode": "bounce",
+            "random": "false",
+            "speed": 0.2,
+            "straight": "false"
+        },
+        "number": {
+            "density": {
+                "enable": "true",
+                "area": 800
+            },
+            "value": 15
+        },
+        "opacity": {
+            "value": 0.5
+        },
+        "shape": {
+            "type": "circle"
+        },
+        "size": {
+            "random": "true",
+            "value": 2
+        }
+    },
+    "detectRetina": "true"
+}

@@ -2,20 +2,23 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/tailwind.css'
 
-import {createRouter, createWebHashHistory} from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Particles from "vue3-particles";
+
 
 const HomeView = () => import('./views/HomeView.vue');
 
 const routes = [
-  { path: '/', component: HomeView},
+    { path: '/', component: HomeView },
 
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes: routes
+    history: createWebHashHistory(),
+    routes: routes
 })
 
 const app = createApp(App)
 app.use(router)
-.mount('#app')
+app.use(Particles)
+    .mount('#app')
