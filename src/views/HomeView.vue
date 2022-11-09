@@ -6,5 +6,5 @@
 </template>
 
 <script setup>
-import HeadingItemVue from '@/components/HeadingItem.vue';
+import HeadingItemVue from '@/components/Home/HeadingItem.vue';
 </script>
