@@ -5,6 +5,7 @@
             <SellingBulletsVue/>
             <HomeCTAVue/>
         </div>
+        <UnsignedShortenerVue/>
     </div>
 </template>
 
@@ -12,4 +13,5 @@
 import HeadingItemVue from '@/components/Home/HeadingItem.vue';
 import HomeCTAVue from '@/components/Home/HomeCTA.vue';
 import SellingBulletsVue from '@/components/Home/SellingBullets.vue';
+import UnsignedShortenerVue from '@/components/Home/UnsignedShortener.vue';
 </script>
