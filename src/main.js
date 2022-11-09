@@ -1,4 +1,21 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import './assets/tailwind.css'
 
-createApp(App).mount('#app')
+import {createRouter, createWebHashHistory} from 'vue-router'
+
+const HomeView = () => import('./views/HomeView.vue');
+
+const routes = [
+  { path: '/', component: HomeView},
+
+]
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: routes
+})
+
+const app = createApp(App)
+app.use(router)
+.mount('#app')
