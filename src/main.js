@@ -7,12 +7,12 @@ import Particles from "vue3-particles";
 
 
 const HomeView = () => import('./views/HomeView.vue');
-const LoginView = () => import('./views/LoginView.vue');
+const AuthView = () => import('./views/AuthView.vue');
 const AboutView = () => import('./views/AboutView.vue');
 
 const routes = [
     { path: '/', component: HomeView },
-    { path: '/login', component: LoginView },
+    { path: '/login', component: AuthView },
     { path: '/about', component: AboutView },
 
 ]
