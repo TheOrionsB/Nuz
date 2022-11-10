@@ -4,6 +4,7 @@
         "No url ?",
         "It's a bit too long...",
         "Ay ay captain!",
+        "Bob was here",
         "Letzgongue",
         "nuz.sh = perfect domain",
         "Mom says she's proud",
@@ -15,7 +16,7 @@
             {"bullet": "• Free"},
             {"bullet": "• Anonymous"},
             {"bullet": "• Password protected"},
-            {"bullet": "• Encrypted"},
+            {"bullet": "• Soon to be E2E encrypted"},
             {"bullet": "• With statistics"}
         ]
     },

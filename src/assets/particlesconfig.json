@@ -1,5 +1,5 @@
 {
-    "fpsLimit": 60,
+    "fpsLimit": 30,
     "particles": {
         "color": {
             "value": "#ffffff"
@@ -12,7 +12,7 @@
             "enable": "true",
             "outMode": "bounce",
             "random": "false",
-            "speed": 0.2,
+            "speed": 1,
             "straight": "false"
         },
         "number": {
@@ -20,17 +20,17 @@
                 "enable": "true",
                 "area": 800
             },
-            "value": 15
+            "value": 10
         },
         "opacity": {
-            "value": 0.5
+            "value": 1
         },
         "shape": {
             "type": "circle"
         },
         "size": {
             "random": "true",
-            "value": 2
+            "value": 1
         }
     },
     "detectRetina": "true"
