@@ -8,7 +8,7 @@
                     <a class="text-gray-400" href="/login?signup=1">I don't have an account :(</a>
                 </div>
                 <div class="text-center" v-if="formState === 'signup'">
-                    <h2  class="text-3xl font-bold">Be one of us!</h2>
+                    <h2  class="text-3xl font-bold">Become one of us!</h2>
                     <a class="text-gray-400" href="/login">Duh, I have an account</a>
                 </div>
             </div>
