@@ -23,7 +23,7 @@ rest.post('/api/user/authenticate', (req,res,ctx) => {
     if (!req.json.username !== "correctUser" || !req.json.password !== "correctPass") return res(ctx.status(403))
 
     return res(
-        ctx.status(200)
+        ctx.status(200),
         ctx.json({ status: "OK", token: "somevalidtoken"})
     )
 })
