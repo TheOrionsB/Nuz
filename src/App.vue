@@ -19,6 +19,8 @@ import HeaderGlobal from '@/components/HeaderGlobal.vue';
 const particlesInit = async engine => {
   await loadFull(engine);
 };
+
+
 </script>
 
 <style>

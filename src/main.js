@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { createPinia } from 'pinia'
 import './assets/tailwind.css'
 
 import { createRouter, createWebHistory } from 'vue-router'
@@ -23,6 +24,8 @@ const router = createRouter({
 })
 
 const app = createApp(App)
-app.use(router)
-app.use(Particles)
+const pinia = createPinia();
+app.use(pinia)
+    .use(router)
+    .use(Particles)
     .mount('#app')

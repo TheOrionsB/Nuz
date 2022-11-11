@@ -5,12 +5,22 @@
         href="/">Nuz</a>
       <a class="text-white" v-for="(item, index) in HomeStrings.Navigation" :key="index" :href="item.path">{{ item.pretty }}</a>
     </div>
-    <div class="flex flex-row space-x-1 lg:space-x-4 items-center">
+    <div v-if="!showProfileMenu" class="flex flex-row space-x-1 lg:space-x-4 items-center">
       <a name="login" href="/login" class="text-gray-300">{{ HomeStrings.login }}</a>
       <a name="sign up" href="/login?signup=1" class="text-purple-300 border border-purple-300 rounded py-2 px-2">{{ HomeStrings.signup }}</a>
+    </div>
+    <div v-if="showProfileMenu" class="flex flex-row space-x-1 lg:space-x-4 items-center">
+      <a name="login" href="/login" class="text-gray-300 underline">{{ authStore.getUsername() }}</a>
     </div>
   </header>
 </template>
 <script setup>
 import HomeStrings from '../assets/homestrings.json'
+import { useAuthenticationStore } from '@/stores/AuthStore';
+import { ref } from 'vue';
+
+const authStore = useAuthenticationStore();
+
+const showProfileMenu = ref(authStore.username !== "" ? true : false);
+
 </script>

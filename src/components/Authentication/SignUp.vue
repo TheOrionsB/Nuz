@@ -44,8 +44,8 @@
             <input v-if="formInputs.passwordconf.value"
                 class="bg-transparent w-[50%] self-center text-xl text-purple-300 border border-purple-300 rounded p-3"
                 type="submit" value="I want to sign up" />
-                <p v-if="token !== '' && token !== 'error'">You are now registered ! Enjoy !</p>
-                <p class="text-red-300" v-if="token === 'error'">An error occurred while registering :(</p>
+            <p v-if="token !== '' && token !== 'error'">You are now registered ! Enjoy ! {{authenticationStore.getUsername()}}</p>
+            <p class="text-red-300" v-if="token === 'error'">An error occurred while registering :(</p>
         </span>
     </form>
 
@@ -53,8 +53,9 @@
 <script setup >
 import { ref } from 'vue';
 import { doesUserExist, authenticate } from '@/api/UsersApi';
+import { useAuthenticationStore } from '@/stores/AuthStore.js'
 
-
+const authenticationStore = useAuthenticationStore();
 const formInputs = {
     username: ref(null),
     password: ref(null),
@@ -107,6 +108,8 @@ const handleKeyDown = () => {
 const registerUser = async () => {
     const response = await authenticate({ username: formInputs.username.value, password: formInputs.password.value }, "register")
     response.success ? token.value = response.token : token.value = "error";
+    authenticationStore.authenticateUser(formInputs.username.value, response.token);
+
 }
 
 window.addEventListener("keydown", handleKeyDown);
