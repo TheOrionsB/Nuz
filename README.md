@@ -1,24 +1,23 @@
-# nuz
+## Nuz
 
-## Project setup
-```
-yarn install
-```
+Nuz is a simple project that I develop to make myself comfortable with VueJS version 3.
+It's yet another URL shortener that may be deployed one day.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+#### It will be:
+- Free
+- Encrypted
+- Include password protected links
+- Include link expiracy (optionnal)
 
-### Compiles and minifies for production
-```
-yarn build
-```
+Its backend is in a separate repo "nuzStnrAPI" that also uses a technology that's a first for me, typescript.
 
-### Lints and fixes files
-```
-yarn lint
-```
+#### Build
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Clone repo
+- ``yarn install``
+- ``yarn serve``
+
+#### Run tests
+- ``yarn coverage``
+- ``yarn test:unit``
+- ``yarn test:coverage``
