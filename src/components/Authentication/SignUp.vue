@@ -1,5 +1,5 @@
 <template>
-    <form class="flex flex-col p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 ">
+    <form class="flex flex-col p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 " @submit.prevent="registerUser">
         <span class="flex flex-col h-full justify-around space-y-4">
             <span class="flex flex-col space-y-2">
                 <label class="font-bold text-xl">Choose a username</label>
@@ -7,14 +7,25 @@
                     @blur="isUsernameFocused = false"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="text" placeholder="Username" />
-                <p class="text-purple-300" v-if="isUsernameValid === true">This username is available</p>
-                <p class="text-red-300" v-if="isUsernameValid === false && hasFirstKeyBeenPressedUsername === true">This
+                <p class="text-purple-300" v-if="isUsernameValid === 'available'">This username is available</p>
+                <p class="text-red-300" v-if="isUsernameValid === 'exists' && hasFirstKeyBeenPressedUsername === true">
+                    This
                     username is already taken
                 </p>
+                <div class="text-red-300"
+                    v-if="isUsernameValid === 'invalid' && hasFirstKeyBeenPressedUsername === true">
+                    <p>This username is invalid make sure:</p>
+                    <ul>
+                        <li>• You don't include special characters</li>
+                        <li>• You don't include spaces</li>
+                        <li>• Your username is at least 1 character long</li>
+                    </ul>
+                </div>
             </span>
             <span v-if="formInputs.username.value !== null" class="flex flex-col space-y-2">
                 <label class="font-bold text-xl">Find a strong password</label>
-                <input @focus="isPasswordFocused='true'" @blur="isPasswordFocused = false" v-model="formInputs.password.value"
+                <input @focus="isPasswordFocused = 'true'" @blur="isPasswordFocused = false"
+                    v-model="formInputs.password.value"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="password" placeholder="Password" />
             </span>
@@ -24,7 +35,8 @@
                     v-model="formInputs.passwordconf.value"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="password" placeholder="Password confirmation" />
-                <p class="text-purple-300" v-if="doPasswordsMatch === true && isUsernameValid === true">Everything looks good !</p>
+                <p class="text-purple-300" v-if="doPasswordsMatch === true && isUsernameValid === 'available'">
+                    Everything looks good !</p>
                 <p class="text-red-300"
                     v-if="doPasswordsMatch === false && hasFirstKeyBeenPressedPasswordConf === true">Passwords mismatch
                 </p>
@@ -32,11 +44,16 @@
             <input v-if="formInputs.passwordconf.value"
                 class="bg-transparent w-[50%] self-center text-xl text-purple-300 border border-purple-300 rounded p-3"
                 type="submit" value="I want to sign up" />
+                <p v-if="token !== '' && token !== 'error'">You are now registered ! Enjoy !</p>
+                <p class="text-red-300" v-if="token === 'error'">An error occurred while registering :(</p>
         </span>
     </form>
+
 </template>
 <script setup >
 import { ref } from 'vue';
+import { doesUserExist, authenticate } from '@/api/UsersApi';
+
 
 const formInputs = {
     username: ref(null),
@@ -44,19 +61,31 @@ const formInputs = {
     passwordconf: ref(null)
 }
 const isUsernameFocused = ref(false);
-const isUsernameValid = ref(false);
+const isUsernameValid = ref("pending");
 const hasFirstKeyBeenPressedUsername = ref(false);
 
 const isPasswordConfFocused = ref(false);
 const isPasswordFocused = ref(false);
 const doPasswordsMatch = ref(false);
 const hasFirstKeyBeenPressedPasswordConf = ref(false);
+const token = ref("");
 
 let timeSinceLastInput = setTimeout(() => null, 2000);
 
-const verifyUsername = () => {
+const verifyUsername = async () => {
     if (hasFirstKeyBeenPressedUsername.value === false) hasFirstKeyBeenPressedUsername.value = true;
-    isUsernameValid.value = Math.round(Math.random()) === 1 ? true : false;
+    const response = await doesUserExist(formInputs.username.value);
+    switch (response) {
+        case 200:
+            isUsernameValid.value = "available";
+            break;
+        case 409:
+            isUsernameValid.value = "exists";
+            break;
+        default:
+            isUsernameValid.value = "invalid"
+            break;
+    }
 }
 
 const verifyMatchingPasswords = () => {
@@ -67,12 +96,17 @@ const verifyMatchingPasswords = () => {
 const handleKeyDown = () => {
     if (isUsernameFocused.value) {
         clearTimeout(timeSinceLastInput);
-        timeSinceLastInput = setTimeout(() => verifyUsername(), 1000);
+        timeSinceLastInput = setTimeout(() => verifyUsername(), 500);
     }
     if (isPasswordConfFocused.value || (isPasswordFocused.value && hasFirstKeyBeenPressedPasswordConf.value)) {
         clearTimeout(timeSinceLastInput);
         timeSinceLastInput = setTimeout(() => verifyMatchingPasswords(), 300);
     }
+}
+
+const registerUser = async () => {
+    const response = await authenticate({ username: formInputs.username.value, password: formInputs.password.value }, "register")
+    response.success ? token.value = response.token : token.value = "error";
 }
 
 window.addEventListener("keydown", handleKeyDown);

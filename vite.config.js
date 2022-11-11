@@ -5,4 +5,14 @@ export default defineConfig({
     test: {
       environment: 'happy-dom'
     },
+    devServer: {
+      proxy: {
+        '/api/*': {
+          target: "http://[::1]:42069/",
+          ws: true,
+          changeOrigin: true,
+          secure: false
+        }
+      }
+    },
   });
