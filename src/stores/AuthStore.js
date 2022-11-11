@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export const useAuthenticationStore = defineStore('authentication', () => {
     const username = ref("");
     const token = ref("");
+    const router = useRouter()
 
     /**
      * @private
@@ -43,6 +45,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     const logout = () => {
         setUsername("");
         setToken("");
+        router.push({path: '/'});
     }
 
     return {

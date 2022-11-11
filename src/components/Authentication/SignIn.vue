@@ -21,9 +21,9 @@
     </form>
 </template>
 <script setup>
-import { authenticate } from '@/api/UsersApi';
+import { authenticate } from '../../api/UsersApi';
 import { ref } from 'vue';
-import { useAuthenticationStore } from '@/stores/AuthStore';
+import { useAuthenticationStore } from '../../stores/AuthStore';
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
