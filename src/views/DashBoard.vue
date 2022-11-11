@@ -13,7 +13,9 @@
                     <button class="text-white py-4 px-8 w-full hover:bg-black hover:bg-opacity-50 text-left transition-all ease-in-out duration-150  last-of-type:rounded-b-xl">Advanced</button>
                 </div>
             </div>
-            <div class="bg-gray-900 border-2 bg-opacity-80 border-purple-400 border-opacity-40 w-3/4 "></div>
+            <div class="bg-gray-900 border-2 bg-opacity-80 border-purple-400 border-opacity-40 w-3/4 ">
+                <NewLink/>
+            </div>
         </div>
     </div>
 </template>
@@ -21,6 +23,8 @@
 import { useAuthenticationStore } from '@/stores/AuthStore';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+import NewLink from '../components/Dashboard/NewLink.vue'
+
 const authStore = useAuthenticationStore();
 const router = useRouter()
 const { username } = storeToRefs(authStore);
