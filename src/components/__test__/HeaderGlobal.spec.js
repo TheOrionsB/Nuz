@@ -6,6 +6,7 @@ import { setActivePinia, createPinia } from 'pinia'
 
 vi.mock('vue-router', () => ({
     resolve: vi.fn(),
+    useRouter: vi.fn()
   }));
 
 describe('HeaderGlobal', () => {
