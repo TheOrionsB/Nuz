@@ -7,7 +7,7 @@ export const doesUserExist = async (username) => {
     return response.status
 }
 export const authenticate = async (inputs, action) => {
-    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT}/user${action === "/authenticate" ? action : ""}`, {
+    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT}/user${action === "authenticate" ? "/authenticate" : ""}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
