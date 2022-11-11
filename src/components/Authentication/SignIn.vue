@@ -1,5 +1,6 @@
 <template>
-    <form class="flex flex-col p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 " @submit.prevent="authenticateUser">
+    <form class="flex flex-col p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 "
+        @submit.prevent="authenticateUser">
         <span class="flex flex-col h-full justify-around space-y-4">
             <span class="flex flex-col space-y-2">
                 <label class="font-bold text-xl">Who are you ?</label>
@@ -13,7 +14,7 @@
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="password" placeholder="Password" />
             </span>
-            <input v-if="formInputs.password.value" 
+            <input v-if="formInputs.password.value"
                 class="bg-transparent w-[50%] self-center text-xl text-purple-300 border border-purple-300 rounded p-3"
                 type="submit" value="Let's try" />
         </span>
@@ -23,17 +24,22 @@
 import { authenticate } from '@/api/UsersApi';
 import { ref } from 'vue';
 import { useAuthenticationStore } from '@/stores/AuthStore';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const authStore = useAuthenticationStore();
 const formInputs = {
-    username: ref({content: null, isvalid: null}),
+    username: ref({ content: null, isvalid: null }),
     password: ref(null)
 }
 const error = ref(false);
 
 const authenticateUser = async () => {
-    const response = await authenticate({username: formInputs.username.value.content, password: formInputs.password.value}, "authenticate");
+    const response = await authenticate({ username: formInputs.username.value.content, password: formInputs.password.value }, "authenticate");
     if (response.success !== true) error.value = true;
-    else authStore.authenticateUser(formInputs.username.value.content, response.token);
+    else {
+        authStore.authenticateUser(formInputs.username.value.content, response.token);
+        router.push({ path: '/dashboard' });
+    }
 }
 </script>

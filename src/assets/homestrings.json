@@ -33,7 +33,7 @@
     "signup": "Sign up",
     "headerTitle": "Nuz",
     "Navigation": [
-        {"pretty": "Home", "path": "/home"},
+        {"pretty": "Home", "path": "/"},
         {"pretty": "About", "path": "/about"}
     ]
 }

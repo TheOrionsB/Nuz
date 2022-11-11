@@ -54,7 +54,9 @@
 import { ref } from 'vue';
 import { doesUserExist, authenticate } from '@/api/UsersApi';
 import { useAuthenticationStore } from '@/stores/AuthStore.js'
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const authenticationStore = useAuthenticationStore();
 const formInputs = {
     username: ref(null),
@@ -107,8 +109,7 @@ const handleKeyDown = () => {
 
 const registerUser = async () => {
     const response = await authenticate({ username: formInputs.username.value, password: formInputs.password.value }, "register")
-    response.success ? token.value = response.token : token.value = "error";
-    authenticationStore.authenticateUser(formInputs.username.value, response.token);
+    if (response.success) authenticationStore.authenticateUser(formInputs.username.value, response.token) && router.push({ path: '/dashboard' });
 
 }
 
