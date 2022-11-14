@@ -41,11 +41,12 @@
                     v-if="doPasswordsMatch === false && hasFirstKeyBeenPressedPasswordConf === true">Passwords mismatch
                 </p>
             </span>
-            <input v-if="formInputs.passwordconf.value"
-                class="bg-transparent w-[50%] self-center text-xl text-purple-300 border border-purple-300 rounded p-3"
-                type="submit" value="I want to sign up" />
-            <p v-if="token !== '' && token !== 'error'">You are now registered ! Enjoy ! {{authenticationStore.getUsername()}}</p>
-            <p class="text-red-300" v-if="token === 'error'">An error occurred while registering :(</p>
+            <div v-if="formInputs.passwordconf.value && doPasswordsMatch"
+                class="bg-transparent w-[50%] text-center self-center text-xl text-purple-300 border border-purple-300 rounded p-3">
+                <input v-if="!isSigningUp" class="" type="submit" value="Sign up" />
+                <font-awesome-icon v-if="isSigningUp" :icon="['fas', 'fan']" class="animate-spin" />
+            </div>
+            <p class="text-red-300" v-if="error">An error occurred while registering :(</p>
         </span>
     </form>
 
@@ -69,9 +70,10 @@ const hasFirstKeyBeenPressedUsername = ref(false);
 
 const isPasswordConfFocused = ref(false);
 const isPasswordFocused = ref(false);
+const isSigningUp = ref(false);
+const error = ref(false);
 const doPasswordsMatch = ref(false);
 const hasFirstKeyBeenPressedPasswordConf = ref(false);
-const token = ref("");
 
 let timeSinceLastInput = setTimeout(() => null, 2000);
 
@@ -108,8 +110,16 @@ const handleKeyDown = () => {
 }
 
 const registerUser = async () => {
+    isSigningUp.value = true;
     const response = await authenticate({ username: formInputs.username.value, password: formInputs.password.value }, "register")
-    if (response.success) authenticationStore.authenticateUser(formInputs.username.value, response.token) && router.push({ path: '/dashboard' });
+    if (response.success) {
+        authenticationStore.authenticateUser(formInputs.username.value, response.token);
+        router.push({ path: '/dashboard' });
+    }
+    else {
+        isSigningUp.value = false;
+        error.value = true;
+    }
 
 }
 
