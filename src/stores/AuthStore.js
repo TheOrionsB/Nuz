@@ -39,7 +39,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     }
 
     const genAuthenticationHeader = () => {
-        return (`Bearer + ${getToken()}`)
+        return (`Bearer ${getToken()}`)
     }
 
     const logout = () => {

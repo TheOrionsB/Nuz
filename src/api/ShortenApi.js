@@ -1,10 +1,11 @@
 import { useAuthenticationStore } from "@/stores/AuthStore";
 
 export const newSignedInShortened = async (username, toShorten) => {
+    const authStore = useAuthenticationStore()
     const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT}/shorten`, {
         method: 'POST',
         headers: {
-            'authorization': `Bearer ${token}`
+            'authorization': authStore.genAuthenticationHeader(),
         },
         body: {
             username: username,
@@ -16,10 +17,10 @@ export const newSignedInShortened = async (username, toShorten) => {
     return ({ success: true, shortened: jsonResponse.shortened });
 }
 
-export const getShortened = async (username) => {
+export const getShortened = async () => {
     const authStore = useAuthenticationStore()
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT}/shortened/${username}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT}/shorten/${authStore.getUsername()}`, {
             method: 'GET',
             headers: {
                 'authorization': authStore.genAuthenticationHeader()
