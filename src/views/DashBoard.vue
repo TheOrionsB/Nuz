@@ -22,6 +22,7 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import NewLink from '../components/Dashboard/NewLink.vue'
+import MyLinks from '../components/Dashboard/MyLinks.vue';
 
 const authStore = useAuthenticationStore();
 const router = useRouter()
@@ -34,7 +35,7 @@ const currentComponentIndex = ref(0);
 const subComponents = [
     {name: "Home", component: <div>Home</div>},
     {name: "New link", component: <NewLink/>},
-    {name: "My links", component: <div>My links</div>},
+    {name: "My links", component: <MyLinks/>},
     {name: "Advanced", component: <div>Advanced</div>}
 ]
 </script>
