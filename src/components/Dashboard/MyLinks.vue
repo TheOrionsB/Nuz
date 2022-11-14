@@ -8,21 +8,20 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 const searchInput = ref(null);
 const searchRef = ref(null);
-const logValue = () => {
-    console.log(searchInput.value);
-}
 
-document.addEventListener('keydown', (event) => {
-    if (event.metaKey) {
-        document.addEventListener('keydown', (e) => {
-            if (e.code === "KeyK") {
-                searchRef.value.focus();
-            }
-        })
-    }
+onMounted(() => {
+    document.addEventListener('keydown', (event) => {
+        if (event.metaKey) {
+            document.addEventListener('keydown', (e) => {
+                if (e.code === "KeyK") {
+                    searchRef.value.focus();
+                }
+            })
+        }
+    })
 })
 
 </script>
