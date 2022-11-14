@@ -44,6 +44,6 @@ onMounted(async () => {
             })
         }
     })
-    shortenedList.value = (await getShortened()).shortened;
+    shortenedList.value = (await getShortened()).shortened.reverse();
 })
 </script>
