@@ -14,9 +14,17 @@
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="password" placeholder="Password" />
             </span>
-            <input v-if="formInputs.password.value"
-                class="bg-transparent w-[50%] self-center text-xl text-purple-300 border border-purple-300 rounded p-3"
-                type="submit" value="Let's try" />
+            <div class="flex flex-col space-y-2" v-if="formInputs.password.value">
+                <div class="bg-transparent w-[50%] self-center text-center text-lg text-purple-300 border border-purple-300 rounded p-2">
+                    <input v-if="loggingIn === false"
+                        class=""
+                        type="submit" value="Let's try" />
+                    <font-awesome-icon v-if="loggingIn === true" class="text-purple-300 animate-spin"
+                        :icon="['fas', 'fan']" />
+                </div>
+                <p v-if="error" class="text-red-300">An error occurred while signing in. Check your credentials and try
+                    again.</p>
+            </div>
         </span>
     </form>
 </template>
@@ -28,6 +36,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 const authStore = useAuthenticationStore();
+const loggingIn = ref(false);
 const formInputs = {
     username: ref({ content: null, isvalid: null }),
     password: ref(null)
@@ -35,8 +44,12 @@ const formInputs = {
 const error = ref(false);
 
 const authenticateUser = async () => {
+    loggingIn.value = true;
     const response = await authenticate({ username: formInputs.username.value.content, password: formInputs.password.value }, "authenticate");
-    if (response.success !== true) error.value = true;
+    if (response.success !== true) {
+        loggingIn.value = false;
+        error.value = true;
+    }
     else {
         authStore.authenticateUser(formInputs.username.value.content, response.token);
         router.push({ path: '/dashboard' });
