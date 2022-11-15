@@ -1,16 +1,27 @@
 import { useAuthenticationStore } from "../stores/AuthStore";
 
 const buildNewShortenedData = (formInputs) => {
-    // if (!formInputs.name.value || !formInputs.target.value || !formInputs.src.value) return false;
+    const shortenedSuffix = formInputs.src.value.split('/');
+    console.log();
     return ({
         name: formInputs.name.value,
-        source: formInputs.src.value,
+        source: shortenedSuffix[shortenedSuffix.length - 1],
         target: formInputs.target.value,
         passwordProtected: formInputs.password.value ? true : false,
         password: formInputs.password.value ? formInputs.password.value : null,
         isExpiringEnabled: formInputs.expirationDate && formInputs.expirationDate.value ? true : false,
         expiresAt: formInputs.expirationDate && formInputs.expirationDate.value ? new Date(formInputs.expirationDate.value) : null
     });
+}
+
+export const getNewShortened = async () => {
+    try {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT}/shorten/new`, { method: 'GET'});
+        const jsonResponse = await response.json();
+        return ({success: true, shortened: `https://nuz.sh/${jsonResponse.shortened}`})
+    } catch (e) {
+        return ({success: false});
+    }
 }
 
 export const newSignedInShortened = async (toShorten) => {

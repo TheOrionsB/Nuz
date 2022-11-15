@@ -56,7 +56,7 @@
     </div>
 </template>
 <script setup>
-import { newSignedInShortened } from '@/api/ShortenApi';
+import { getNewShortened, newSignedInShortened } from '@/api/ShortenApi';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -101,7 +101,7 @@ const createLink = async () => {
 const handleKeyDown = () => {
     if (isTargetURLFocused.value) {
         clearTimeout(timeSinceLastInput);
-        timeSinceLastInput = setTimeout(() => verifyProvidedURL(), 500);
+        timeSinceLastInput = setTimeout(async () => {verifyProvidedURL(); formInputs.src.value = (await getNewShortened()).shortened}, 500);
     }
 }
 
