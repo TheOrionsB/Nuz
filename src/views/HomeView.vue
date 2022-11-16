@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col space-y-10">
+    <div class="flex flex-col pt-10 qhd:px-[10%] qhd:py-[5%] h-full space-y-10">
         <HeadingItemVue />
         <div class="flex flex-col justify-start px-[5%] qhd:px-[10%] lg:flex lg:flex-row lg:justify-evenly">
             <SellingBulletsVue />

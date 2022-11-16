@@ -21,7 +21,6 @@ const props = defineProps({
 const { visible } = toRefs(props);
 
 watch(visible, () => {
-    console.log("visible changed value")
     isVisible.value = !isVisible.value;
 })
 </script>

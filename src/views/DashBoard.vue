@@ -1,7 +1,7 @@
 <template>
-    <div v-if="username !== ''" class="text-white space-y-10 px-[5%] pt-10 qhd:px-[15%]">
-        <div class="flex flex-row w-full space-x-10">
-            <div class="flex flex-col w-1/4 space-y-5">
+    <div v-if="username !== ''" class="text-white space-y-10 p-[7%] qhd:p-[5%] h-full max-sm:px-1 max-sm:py-[20%]">
+        <div class="flex flex-row w-full space-x-10 h-full">
+            <div class="flex flex-col w-1/4 space-y-5 max-sm:hidden">
                 <div class="bg-gray-900 bg-opacity-70 p-4 text-2xl ">
                     <h2>{{ authStore.getUsername() }}</h2>
                     <button class="text-red-300 text-lg" @click="authStore.logout()">Log out</button>
@@ -10,7 +10,7 @@
                     <button @click="currentComponentIndex = index" v-for="(subComponent, index) in subComponents" :key="index" :class="{ ['bg-black bg-opacity-50']: currentComponentIndex === index }" class="text-white py-4 px-8 w-full hover:bg-black hover:bg-opacity-50 text-left font-extralight transition-all ease-in-out duration-150 first-of-type:rounded-t-xl">{{subComponent.name}}</button>
                 </div>
             </div>
-            <div class="bg-gray-900 border-2 bg-opacity-80 border-purple-400 border-opacity-40 w-3/4 ">
+            <div class="bg-gray-900 border-2 bg-opacity-80 border-purple-400 border-opacity-40 w-3/4 max-sm:w-full">
                 <component :is="subComponents[currentComponentIndex].component"/>
             </div>
         </div>

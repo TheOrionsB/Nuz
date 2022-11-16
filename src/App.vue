@@ -3,7 +3,7 @@
     <div class="h-screen w-screen bg-gradient-to-br from-indigo-900 via-black to-black">
       <div class="h-screen w-screen bg-transparent overflow-y-scroll overflow-x-hidden">
         <HeaderGlobal />
-        <RouterView />
+        <RouterView class="h-full" />
         <Particles class="z-0" id="tsparticles" :particlesInit="particlesInit" :options="ParticlesConfig" />
       </div>
     </div>

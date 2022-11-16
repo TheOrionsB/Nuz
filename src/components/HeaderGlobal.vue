@@ -1,5 +1,5 @@
 <template>
-  <header class="flex flex-row justify-between px-2 lg:px-10 py-4 ">
+  <header class="flex flex-row justify-between px-2 lg:px-10 py-4 z-50 fixed w-full ">
     <div class="flex flex-row space-x-1 lg:space-x-4 items-center">
       <router-link name="nuz" class="text-white rounded py-1 font-bold px-4 bg-gradient-to-r from-purple-400 to-purple-500"
         to="/">Nuz</router-link>
