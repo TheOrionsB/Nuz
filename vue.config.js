@@ -10,5 +10,5 @@ module.exports = defineConfig({
         secure: false
       }
     }
-  }
+  },
 })

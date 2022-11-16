@@ -7,13 +7,14 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vitest",
+    "test:unit": "vitest --mode test",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.2",
+    "@pinia/testing": "^0.0.14",
     "@vitejs/plugin-vue": "^3.2.0",
     "autoprefixer": "^10.4.13",
     "core-js": "^3.8.3",
