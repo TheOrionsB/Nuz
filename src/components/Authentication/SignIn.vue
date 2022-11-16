@@ -15,10 +15,9 @@
                     type="password" placeholder="Password" />
             </span>
             <div class="flex flex-col space-y-2" v-if="formInputs.password.value">
-                <div class="bg-transparent w-[50%] self-center text-center text-lg text-purple-300 border border-purple-300 rounded p-2">
-                    <input v-if="loggingIn === false"
-                        class=""
-                        type="submit" value="Let's try" />
+                <div
+                    class="bg-transparent w-[50%] self-center text-center text-lg text-purple-300 border border-purple-300 rounded p-2">
+                    <input v-if="loggingIn === false" class="" type="submit" value="Let's try" />
                     <font-awesome-icon v-if="loggingIn === true" class="text-purple-300 animate-spin"
                         :icon="['fas', 'fan']" />
                 </div>
@@ -35,13 +34,13 @@ import { useAuthenticationStore } from '../../stores/AuthStore';
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const authStore = useAuthenticationStore();
 const loggingIn = ref(false);
 const formInputs = {
     username: ref({ content: null, isvalid: null }),
     password: ref(null)
 }
 const error = ref(false);
+const authStore = useAuthenticationStore();
 
 const authenticateUser = async () => {
     loggingIn.value = true;
@@ -49,8 +48,8 @@ const authenticateUser = async () => {
     if (response.success !== true) {
         loggingIn.value = false;
         error.value = true;
-    }
-    else {
+    } else {
+        console.log("Should call authStore")
         authStore.authenticateUser(formInputs.username.value.content, response.token);
         router.push({ path: '/dashboard' });
     }

@@ -8,8 +8,7 @@ export const doesUserExist = async (username) => {
 }
 export const authenticate = async (inputs, action) => {
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user${action === "authenticate" ? "/authenticate" : ""}`, {
-            method: "POST",
+         const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user${action === "authenticate" ? "/authenticate" : ""}`, {            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -18,13 +17,16 @@ export const authenticate = async (inputs, action) => {
                 "password": inputs.password
             }),
         })
+        console.log(response.status);
+        console.log("executed");
         let jsonResponse = {};
         if (response.status === 200) {
             jsonResponse = await response.json();
             return ({ success: true, token: jsonResponse.token });
         }
-        return ({success: false});
+        return ({ success: false });
     } catch (e) {
+        console.log(e);
         return ({ success: false })
     }
 }

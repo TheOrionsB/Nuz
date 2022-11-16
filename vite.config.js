@@ -3,7 +3,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
     plugins: [vue()],
     test: {
-      environment: 'happy-dom'
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: ['./src/components/__test__/setup.js']
     },
     devServer: {
       proxy: {
