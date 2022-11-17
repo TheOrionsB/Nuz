@@ -13,11 +13,11 @@ export const restHandlers = [
         )
     }),
 
-    rest.post('http://example.rest/testingApi/user', (req, res, ctx) => {
-        if (!req.json.username || !req.json.password) return res(ctx.status(400))
-        if (!req.json.username === "ExistingUser") return res(ctx.status(403))
-        if (req.json.triggerservererror) return res(ctx.status(500))
-
+    rest.post('http://example.rest/testingApi/user', async (req, res, ctx) => {
+        const reqBody = await req.json();
+        if (!reqBody.username || !reqBody.password) return res(ctx.status(400))
+        if (!reqBody.username === "ExistingUser") return res(ctx.status(403))
+        if (reqBody.triggerservererror) return res(ctx.status(500))
         return res(
             ctx.status(200),
             ctx.json({ success: true, token: "somevalidtoken" })
