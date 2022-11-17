@@ -38,12 +38,12 @@
                 <p class="text-purple-300" v-if="doPasswordsMatch === true && isUsernameValid === 'available'">
                     Everything looks good !</p>
                 <p class="text-red-300"
-                    v-if="doPasswordsMatch === false && hasFirstKeyBeenPressedPasswordConf === true">Passwords mismatch
+                    v-if="doPasswordsMatch === false">Passwords mismatch
                 </p>
             </span>
             <div v-if="formInputs.passwordconf.value"
                 class="bg-transparent w-[50%] text-center self-center text-xl text-purple-300 border border-purple-300 rounded p-3">
-                <input v-if="!isSigningUp" class="" type="submit" value="Sign up" />
+                <input v-if="!isSigningUp" :disabled="doPasswordsMatch ? false : true" class="" type="submit" value="Sign up" />
                 <font-awesome-icon v-if="isSigningUp" :icon="['fas', 'fan']" class="animate-spin" />
             </div>
             <p class="text-red-300" v-if="error">An error occurred while registering :(</p>
@@ -111,6 +111,10 @@ const handleKeyDown = () => {
 
 const registerUser = async () => {
     isSigningUp.value = true;
+    if (formInputs.password.value !== formInputs.passwordconf.value) {
+        doPasswordsMatch.value = false;
+        return
+    }
     const response = await authenticate({ username: formInputs.username.value, password: formInputs.password.value }, "register")
     if (response.success) {
         authenticationStore.authenticateUser(formInputs.username.value, response.token);

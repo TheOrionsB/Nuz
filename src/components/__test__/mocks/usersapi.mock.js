@@ -16,7 +16,7 @@ export const restHandlers = [
     rest.post('http://example.rest/testingApi/user', async (req, res, ctx) => {
         const reqBody = await req.json();
         if (!reqBody.username || !reqBody.password) return res(ctx.status(400))
-        if (!reqBody.username === "ExistingUser") return res(ctx.status(403))
+        if (reqBody.username === "ExistingUser") return res(ctx.status(409))
         if (reqBody.triggerservererror) return res(ctx.status(500))
         return res(
             ctx.status(200),
