@@ -41,7 +41,7 @@
                     v-if="doPasswordsMatch === false && hasFirstKeyBeenPressedPasswordConf === true">Passwords mismatch
                 </p>
             </span>
-            <div v-if="formInputs.passwordconf.value && doPasswordsMatch"
+            <div v-if="formInputs.passwordconf.value"
                 class="bg-transparent w-[50%] text-center self-center text-xl text-purple-300 border border-purple-300 rounded p-3">
                 <input v-if="!isSigningUp" class="" type="submit" value="Sign up" />
                 <font-awesome-icon v-if="isSigningUp" :icon="['fas', 'fan']" class="animate-spin" />
@@ -53,8 +53,8 @@
 </template>
 <script setup >
 import { ref } from 'vue';
-import { doesUserExist, authenticate } from '@/api/UsersApi';
-import { useAuthenticationStore } from '@/stores/AuthStore.js'
+import { doesUserExist, authenticate } from '../../api/UsersApi';
+import { useAuthenticationStore } from '../../stores/AuthStore.js'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
@@ -123,6 +123,6 @@ const registerUser = async () => {
 
 }
 
-window.addEventListener("keydown", handleKeyDown);
+window.addEventListener("keypress", handleKeyDown);
 
 </script>
