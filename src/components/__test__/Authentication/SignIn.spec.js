@@ -5,6 +5,7 @@ import { createTestingPinia } from '@pinia/testing';
 import { nextTick } from 'vue';
 import { useAuthenticationStore } from '../../../stores/AuthStore';
 import { useRouter } from 'vue-router';
+import waitForExpect from 'wait-for-expect';
 
 const mockPush = vi.fn();
 vi.mock('vue-router', () => ({
@@ -50,7 +51,7 @@ describe('SignInComponent', () => {
 
             }
         });
-        wrapper.find('input[type=text]').setValue('test');
+        await wrapper.find('input[type=text]').setValue('test');
         await nextTick(() => {
             wrapper.find('input[type=password]').setValue("test");
         })
@@ -67,8 +68,12 @@ describe('SignInComponent', () => {
         });
         const authStore = useAuthenticationStore()
         await wrapper.find("input[type=text]").setValue('correctUser');
-        await nextTick(() => { wrapper.find('input[type=password]').setValue('correctPass') })
-        await nextTick(() => { wrapper.find('form').trigger('submit') });
-        expect(authStore.authenticateUser).toHaveBeenCalled();
+        await nextTick(() => { expect(wrapper.findAll("input[type=password]").length).toBe(1); })
+        await wrapper.find('input[type=password]').setValue('correctPass');
+        await nextTick(() => { expect(wrapper.findAll("input[type=submit]").length).toBe(1) });
+        await wrapper.findAll("form")[0].trigger('submit');
+        await waitForExpect(() => {
+            expect(authStore.authenticateUser).toHaveBeenCalled();
+        })
     })
 })

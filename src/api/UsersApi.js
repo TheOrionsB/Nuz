@@ -17,8 +17,6 @@ export const authenticate = async (inputs, action) => {
                 "password": inputs.password
             }),
         })
-        console.log(response.status);
-        console.log("executed");
         let jsonResponse = {};
         if (response.status === 200) {
             jsonResponse = await response.json();

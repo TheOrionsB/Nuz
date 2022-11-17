@@ -36,6 +36,7 @@ export const useAuthenticationStore = defineStore('authentication', () => {
     const authenticateUser = (username, token) => {
         setUsername(username);
         setToken(token);
+        return (true);
     }
 
     const genAuthenticationHeader = () => {

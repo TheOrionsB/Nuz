@@ -3,10 +3,8 @@ import {
   afterEach,
   beforeAll,
 } from 'vitest';
-// import { restHandlers } from './mocks/usersapi.mock';
 import { setupServer } from 'msw/node'
 import { fetch } from 'cross-fetch';
-import { rest } from 'msw'
 import { restHandlers } from './mocks/usersapi.mock';
 global.fetch = fetch;
 

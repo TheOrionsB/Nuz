@@ -42,7 +42,8 @@
     "jsdom": "^20.0.2",
     "msw": "^0.48.1",
     "vitest": "^0.25.1",
-    "vue-cli-plugin-tailwind": "~3.0.0"
+    "vue-cli-plugin-tailwind": "~3.0.0",
+    "wait-for-expect": "^3.0.2"
   },
   "eslintConfig": {
     "root": true,

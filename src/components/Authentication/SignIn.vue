@@ -48,8 +48,8 @@ const authenticateUser = async () => {
     if (response.success !== true) {
         loggingIn.value = false;
         error.value = true;
+        return;
     } else {
-        console.log("Should call authStore")
         authStore.authenticateUser(formInputs.username.value.content, response.token);
         router.push({ path: '/dashboard' });
     }
