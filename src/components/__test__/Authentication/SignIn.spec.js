@@ -67,13 +67,30 @@ describe('SignInComponent', () => {
             }
         });
         const authStore = useAuthenticationStore()
-        await wrapper.find("input[type=text]").setValue('correctUser');
+        await wrapper.find("input[type=text]").setValue("correctUser");
         await nextTick(() => { expect(wrapper.findAll("input[type=password]").length).toBe(1); })
-        await wrapper.find('input[type=password]').setValue('correctPass');
+        await wrapper.find('input[type=password]').setValue("correctPass");
         await nextTick(() => { expect(wrapper.findAll("input[type=submit]").length).toBe(1) });
         await wrapper.findAll("form")[0].trigger('submit');
         await waitForExpect(() => {
             expect(authStore.authenticateUser).toHaveBeenCalled();
+            expect(router.push).toHaveBeenCalledWith({path: '/dashboard'});
+        })
+    })
+    it('Tries to login with invalid credentials', async () => {
+        const wrapper = mount(SignIn, {
+            global: {
+                stubs: ['FontAwesomeIcon'],
+                plugins: [createTestingPinia({ createSpy: vi.fn })],
+            }
+        });
+        await wrapper.find("input[type=text]").setValue('incorrectUser');
+        await nextTick(() => { expect(wrapper.findAll("input[type=password]").length).toBe(1); })
+        await wrapper.find('input[type=password]').setValue('incorrectPass');
+        await nextTick(() => { expect(wrapper.findAll("input[type=submit]").length).toBe(1) });
+        await wrapper.findAll("form")[0].trigger('submit');
+        await waitForExpect(() => {
+            expect(wrapper.text()).toContain("error");
         })
     })
 })
