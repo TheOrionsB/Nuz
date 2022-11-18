@@ -13,7 +13,6 @@ vi.mock('vue-router', () => ({
     useRouter: () => ({
         push: mockPush
     }),
-
 }));
 const router = useRouter();
 
@@ -74,7 +73,7 @@ describe('SignInComponent', () => {
         await wrapper.findAll("form")[0].trigger('submit');
         await waitForExpect(() => {
             expect(authStore.authenticateUser).toHaveBeenCalled();
-            expect(router.push).toHaveBeenCalledWith({path: '/dashboard'});
+            expect(router.push).toHaveBeenCalledWith({ path: '/dashboard' });
         })
     })
     it('Tries to login with invalid credentials', async () => {

@@ -89,7 +89,6 @@ const verifyProvidedURL = async () => {
 const createLink = async () => {
     isLinkCreating.value = true;
     const result = await newSignedInShortened(formInputs);
-    console.log(result);
     if (result.success) {
         isLinkCreating.value = false;
         error.value = false;

@@ -2,7 +2,6 @@ import { useAuthenticationStore } from "../stores/AuthStore";
 
 const buildNewShortenedData = (formInputs) => {
     const shortenedSuffix = formInputs.src.value.split('/');
-    console.log();
     return ({
         name: formInputs.name.value,
         source: shortenedSuffix[shortenedSuffix.length - 1],
