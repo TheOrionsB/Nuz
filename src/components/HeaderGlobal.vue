@@ -15,7 +15,7 @@
   </header>
 </template>
 <script setup>
-import HomeStrings from '../assets/homestrings.json'
+import HomeStrings from '../assets/translations/english/homestrings.json'
 import { useAuthenticationStore } from '../stores/AuthStore';
 import { storeToRefs } from 'pinia';
 

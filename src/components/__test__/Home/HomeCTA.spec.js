@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import HomeCTA from '../../Home/HomeCTA.vue';
 import { describe, expect, it, vi } from "vitest";
-import HomeStrings from '../../../assets/homestrings.json';
+import HomeStrings from '../../../assets/translations/english/homestrings.json'
 import { createTestingPinia } from '@pinia/testing'
 
 vi.mock('vue-router', () => ({

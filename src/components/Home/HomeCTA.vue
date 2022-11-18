@@ -11,7 +11,7 @@
 </template>
 <script setup>
 import { storeToRefs } from 'pinia';
-import HomeStrings from '../../assets/homestrings.json'
+import HomeStrings from '../../assets/translations/english/homestrings.json'
 import { useAuthenticationStore } from '../../stores/AuthStore';
 
 const authStore = useAuthenticationStore();

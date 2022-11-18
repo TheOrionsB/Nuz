@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import HeadingItemVue from '../../Home/HeadingItem.vue';
 import { describe, expect, it, vi } from "vitest";
-import HomeStrings from '../../../assets/homestrings.json';
+import HomeStrings from '../../../assets/translations/english/homestrings.json'
 vi.mock('vue-router', () => ({
     resolve: vi.fn(),
 }));

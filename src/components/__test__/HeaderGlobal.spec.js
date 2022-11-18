@@ -1,7 +1,7 @@
 import { mount, RouterLinkStub } from '@vue/test-utils';
 import HeaderGlobalVue from '../HeaderGlobal.vue';
 import { describe, expect, it, vi } from "vitest";
-import HomeStrings from '../../assets/homestrings.json';
+import HomeStrings from '../../assets/translations/english/homestrings.json'
 import { createTestingPinia } from '@pinia/testing'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 

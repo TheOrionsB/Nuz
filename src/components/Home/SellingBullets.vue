@@ -7,5 +7,5 @@
     </div>
 </template>
 <script setup>
-import HomeStrings from '../../assets/homestrings.json'
+import HomeStrings from '../../assets/translations/english/homestrings.json'
 </script>
