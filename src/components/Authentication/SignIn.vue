@@ -1,5 +1,5 @@
 <template>
-    <form class="flex flex-col p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 "
+    <form class="flex flex-col p-8 justify-center w-4/6  bg-gray-500 bg-opacity-20 "
         @submit.prevent="authenticateUser">
         <span class="flex flex-col h-full justify-around space-y-4">
             <span class="flex flex-col space-y-2">

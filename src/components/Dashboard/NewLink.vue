@@ -1,11 +1,11 @@
 <template>
-    <div class="w-full h-full p-[5%] qhd:px-[15%] space-y-10">
+    <div class="w-full h-full p-[5%] space-y-10">
         <div class="space-y-1 flex flex-col ">
             <h1 class="font-bold text-3xl ">Create a new link</h1>
             <p class="text-purple-300 ">If you don't want your link to expire or to be password protected, leave their
                 optionnal fields empty.</p>
         </div>
-        <form class="flex flex-col space-y-2 " @submit.prevent="createLink">
+        <form class="flex flex-col space-y-4 " @submit.prevent="createLink">
             <span class="flex flex-col space-y-1">
                 <label class="">Link name</label>
                 <input v-model="formInputs.name.value"
@@ -56,7 +56,7 @@
     </div>
 </template>
 <script setup>
-import { getNewShortened, newSignedInShortened } from '@/api/ShortenApi';
+import { getNewShortened, newSignedInShortened } from '../../api/ShortenApi';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
