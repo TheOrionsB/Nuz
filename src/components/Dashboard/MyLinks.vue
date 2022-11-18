@@ -1,8 +1,9 @@
 <template>
     <div class="flex flex-col w-full justify-center items-center p-4">
-        <div class="w-[90%]">
+        <div class="w-[90%] focus:outline-none focus:border-none focus:outline-purple-400 text-lg bg-transparent flex flex-row items-center border-b-purple-400 border-b p-4 text-purple-300">
+            <font-awesome-icon class="text-opacity-50 text-gray-500 w-14" :icon="['fas', 'magnifying-glass']" />
             <input id="search" ref="searchRef" @change="logValue" v-model="searchInput" type="text"
-                class="focus:outline-none focus:border-none focus:outline-purple-400 text-lg bg-transparent w-full border-b-purple-400 border-b p-4 text-purple-300"
+                class="w-full border-none bg-transparent outline-none"
                 placeholder="Search links... (⌘+K or Windows+K) " />
         </div>
         <div class="w-full p-4">
