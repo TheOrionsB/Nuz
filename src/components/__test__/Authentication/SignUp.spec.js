@@ -26,6 +26,7 @@ describe("SignUp component", () => {
         expect(wrapper.text()).toContain('Choose a username');
         expect(wrapper.findAll('input[type=text]').length).toBe(1);
     });
+
     it('develops to 2nd stage', async () => {
         const wrapper = mount(SignUp, {
             global: {
@@ -38,7 +39,8 @@ describe("SignUp component", () => {
         await nextTick(() => {
             expect(wrapper.findAll('input[type=password]').length).toBe(1);
         })
-    })
+    });
+
     it('develops to 3rd stage', async () => {
         const wrapper = mount(SignUp, {
             global: {
@@ -54,7 +56,8 @@ describe("SignUp component", () => {
         await nextTick(() => {
             expect(wrapper.findAll('input[type=password]').length).toBe(2);
         })
-    })
+    });
+
     it('develops to 4th stage', async () => {
         const wrapper = mount(SignUp, {
             global: {
@@ -71,7 +74,40 @@ describe("SignUp component", () => {
         await waitForExpect(() => {
             expect(wrapper.findAll('input[type=submit]').length).toBe(1);
         })
-    })
+    });
+
+    it('inputs an available username', async () => {
+        const wrapper = mount(SignUp, {
+            global: {
+                plugins: [createTestingPinia({ createSpy: vi.fn })],
+                stubs: ['FontAwesomeIcon']
+            }
+        });
+        const usernameInput = wrapper.findAll('input')[0];
+        usernameInput.trigger('focus');
+        window.dispatchEvent(new Event('keydown'));
+        usernameInput.setValue('NonExistingUser');
+        await waitForExpect(() => {
+            expect(wrapper.text()).toContain('is available')
+        })
+    });
+
+    it('inputs an unavailable username', async () => {
+        const wrapper = mount(SignUp, {
+            global: {
+                plugins: [createTestingPinia({ createSpy: vi.fn })],
+                stubs: ['FontAwesomeIcon']
+            }
+        });
+        const usernameInput = wrapper.findAll('input')[0];
+        usernameInput.trigger('focus');
+        window.dispatchEvent(new Event('keydown'));
+        usernameInput.setValue('ExistingUser');
+        await waitForExpect(() => {
+            expect(wrapper.text()).toContain('already taken')
+        })
+    });
+
     it('inputs mismatching passwords', async () => {
         const wrapper = mount(SignUp, {
             global: {
@@ -91,7 +127,8 @@ describe("SignUp component", () => {
         const inputWrapper = wrapper.find('input[type=submit]');
         isDisabled = inputWrapper.element.disabled === true;
         expect(isDisabled).toBe(true);
-    })
+    });
+
     it('registers a new user', async () => {
         const wrapper = mount(SignUp, {
             global: {
@@ -109,7 +146,8 @@ describe("SignUp component", () => {
         await waitForExpect(() => {
             expect(authStore.authenticateUser).toHaveBeenCalled();
         })
-    })
+    });
+
     it('tries to register an existing user', async () => {
         const wrapper = mount(SignUp, {
             global: {
@@ -126,5 +164,6 @@ describe("SignUp component", () => {
         await waitForExpect(() => {
             expect(wrapper.text()).toContain("occurred");
         })
-    })
+    });
+
 })

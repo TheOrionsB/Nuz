@@ -16,7 +16,7 @@
                 <span class="flex flex-col space-y-1 w-full">
                     <label class="">Target URL</label>
                     <input @focus="isTargetURLFocused = true" @blur="isTargetURLFocused = false"
-                        v-model="formInputs.target.value"
+                        v-model="formInputs.target.value" id="targetUrlInput"
                         class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                         type="text" placeholder="URL" />
                 </span>
@@ -24,10 +24,11 @@
                     <span class="w-full flex flex-col justify-around space-y-1">
                         <label class="">Generated link</label>
                         <span class="flex flex-row w-full space-x-2">
-                            <input v-model="formInputs.src.value" disabled
+                            <input id="generatedUrlInput" v-model="formInputs.src.value" disabled
                                 class="p-2 bg-gray-900 w-2/3 bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-gray-200 border-opacity-50"
                                 type="text" />
-                            <button @click="console.log('nothing')" class="rounded w-1/3 border-2 border-purple-200 border-opacity-50">
+                            <button @click="console.log('nothing')"
+                                class="rounded w-1/3 border-2 border-purple-200 border-opacity-50">
                                 Regen</button>
                         </span>
                     </span>
@@ -92,7 +93,7 @@ const createLink = async () => {
     if (result.success) {
         isLinkCreating.value = false;
         error.value = false;
-        router.push({path: '/dashboard'})
+        router.push({ path: '/dashboard' })
     } else {
         isLinkCreating.value = false;
         error.value = true;
@@ -101,8 +102,9 @@ const createLink = async () => {
 const handleKeyDown = () => {
     if (isTargetURLFocused.value) {
         clearTimeout(timeSinceLastInput);
-        timeSinceLastInput = setTimeout(async () => {verifyProvidedURL(); formInputs.src.value = (await getNewShortened()).shortened}, 500);
+        timeSinceLastInput = setTimeout(async () => { verifyProvidedURL(); formInputs.src.value = (await getNewShortened()).shortened }, 500);
     }
+
 }
 
 addEventListener('keydown', handleKeyDown);

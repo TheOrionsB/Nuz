@@ -1,9 +1,7 @@
 
 export const doesUserExist = async (username) => {
-    console.log(process.env)
     if (!username) return (null);
     const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/exists/${username}`, { method: "GET" });
-    console.log(response.status)
     return response.status
 }
 export const authenticate = async (inputs, action) => {

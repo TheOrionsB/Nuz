@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-export const restHandlers = [
+export const restUserHandlers = [
     rest.get('http://example.rest/testingApi/user/exists/:username', (req, res, ctx) => {
         if (req.params.username !== "ExistingUser")
             return res(

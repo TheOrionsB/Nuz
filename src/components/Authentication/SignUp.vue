@@ -127,6 +127,6 @@ const registerUser = async () => {
 
 }
 
-window.addEventListener("keypress", handleKeyDown);
+window.addEventListener("keydown", handleKeyDown);
 
 </script>
