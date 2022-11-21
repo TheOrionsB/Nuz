@@ -1,5 +1,5 @@
 <template>
-    <div v-if="username !== ''" class="text-white space-y-10 p-[7%] qhd:p-[5%] h-full max-sm:px-1 max-sm:py-[20%]">
+    <div v-if="username !== ''" class="text-white space-y-10 p-[7%] px-[1%] qhd:p-[5%] h-full max-sm:px-1 max-sm:py-[20%]">
         <div class="flex flex-row w-full space-x-10 h-full">
             <div class="flex flex-col w-1/4 space-y-5 max-sm:hidden">
                 <div class="bg-gray-900 bg-opacity-70 p-4 space-y-4 text-2xl ">

@@ -61,3 +61,18 @@ export const getShortened = async (mode) => {
         return ({ success: false })
     }
 }
+export const getHitHistory = async () => {
+    const authStore = useAuthenticationStore()
+    try {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}/hithistory`, {
+            method: 'GET',
+            headers: {
+                'authorization': authStore.genAuthenticationHeader()
+            }
+        })
+        const jsonResponse = await response.json()
+        if (response.status === 200) return ({ success: true, history: jsonResponse.history });
+    } catch (e) {
+        return ({ success: false })
+    }
+}

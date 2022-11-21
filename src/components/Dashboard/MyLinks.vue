@@ -16,14 +16,11 @@
                                 genFullLink(item.source)
                         }}</a>
                     </div>
-                    <div class="space-x-2 class flex flex-row w-2/5">
-                        <button @click="copyToClipBoard(genFullLink(item.source))"
-                            class="border-gray-800 border p-2 bg-indigo-700 text-indigo-300 hover:bg-indigo-900 hover:text-indigo-200 ease-in-out duration-200 rounded w-full">Copy
-                            link</button>
-                        <button
-                            class="border-gray-800 border p-2 bg-purple-700 text-purple-300 hover:bg-purple-900 hover:text-purple-200 ease-in-out duration-200 rounded w-full">Edit</button>
-                        <button
-                            class="border-gray-800 border p-2 bg-red-700 text-red-300 hover:bg-red-900 hover:text-red-200 ease-in-out duration-200 rounded w-full">Delete</button>
+                    <div class="space-x-2 class flex flex-row w-2/5 justify-end">
+                        <button @click="copyToClipBoard(genFullLink(item.source))" class="bg-purple-700 rounded p-2 w-1/4 text-center text-lg"><font-awesome-icon :icon="['fas', 'copy']"/></button>
+                        <a target='_blank' :href="genFullLink(item.source)"
+                        class="bg-purple-700 rounded p-2 w-1/4 text-center text-lg"><font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']"/></a>
+                        <button class="bg-red-700 rounded p-2 w-1/4 text-center text-lg"><font-awesome-icon :icon="['fas', 'trash']"/></button>
                     </div>
                 </li>
             </ul>

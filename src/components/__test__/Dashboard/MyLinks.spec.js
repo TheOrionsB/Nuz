@@ -29,7 +29,7 @@ vi.mock('../../../api/ShortenApi.js', () => ({
     })
 }))
 
-const ShortenedTexts = ['Stackoverflow response #1', 'YmEBI280', 'Copy', 'Edit', 'Delete']
+const ShortenedTexts = ['Stackoverflow response #1', 'YmEBI280']
 
 describe('MyLinks component', () => {
     it('Renders correctly', () => {
@@ -52,7 +52,8 @@ describe('MyLinks component', () => {
         await waitForExpect(() => {
             expect(getShortened).toHaveBeenCalled();
             expect(wrapper.findAll('li').length).toBe(1);
-            expect(wrapper.findAll('button').length).toBe(3);
+            expect(wrapper.findAll('button').length).toBe(2);
+            expect(wrapper.findAll('a').length).toBe(2);
             for (let shortenedText in ShortenedTexts) {
                 expect(wrapper.text()).toContain(ShortenedTexts[shortenedText]);
             }

@@ -5,10 +5,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Particles from "vue3-particles";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFan, faHouse, faLink, faList, faPlus, faRightFromBracket, faScrewdriver, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faFan, faHouse, faLink, faList, faPlus, faRightFromBracket, faCopy, faArrowUpRightFromSquare, faTrash, faScrewdriver, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import './assets/tailwind.css'
 
-library.add([faFan, faList, faHouse, faLink, faScrewdriver, faRightFromBracket, faMagnifyingGlass, faPlus]);
+library.add([faFan, faList, faHouse, faLink, faScrewdriver, faRightFromBracket, faCopy, faArrowUpRightFromSquare, faTrash, faMagnifyingGlass, faPlus]);
 
 const HomeView = () => import('./views/HomeView.vue');
 const AuthView = () => import('./views/AuthView.vue');
