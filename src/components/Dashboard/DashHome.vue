@@ -33,17 +33,23 @@
                 <ul class="font-light">
                     <li v-for="(item, idx) in currentTopShortenedList" :key="idx"
                         class="hover:bg-gray-700 ease-in-out duration-300 flex flex-row p-4 justify-between items-center first-of-type:border-t-transparent border-b border-b-transparent border-t-2 border-purple-300 border-opacity-40 space-x-4 text-xl">
-                        <span class="flex flex-row w-1/3 items-center">
+                        <span class="flex flex-row w-full items-center">
                             <h4 class="text-2xl w-12 text-center text-purple-200 font-bold">
                                 {{ idx + 1 }}
                             </h4>
                             <h3>(Hits: {{ item.stats.nHit }})</h3>
                         </span>
-                        <span class="flex flex-row space-x-2 w-1/3 items-center">
+                        <span class="flex flex-row space-x-2 w-full items-center">
                             <p>Name:</p>
                             <h3 class="text-purple-300">{{ item.name.length > 12 ? `${item.name.slice(0, 12)}...`: item.name }}</h3>
                         </span>
-                        <span class="flex flex-row space-x-2 w-1/3 items-center justify-end">
+                        <span class="flex w-full flex-row">
+                            <p class="mr-2">Target:</p>
+                            <a class="w-1/2 underline text-purple-500" v-bind:href="genFullLink(item.source)">{{
+                                    item.target.split('/')[2]
+                            }}</a>
+                        </span>
+                        <span class="flex flex-row space-x-2 w-full items-center justify-end">
                             <button @click="copyToClipBoard(genFullLink(item.source))"
                                 class="bg-purple-700 rounded focus:animate-ping hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'copy']" />

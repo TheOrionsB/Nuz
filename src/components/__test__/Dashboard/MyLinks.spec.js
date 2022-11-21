@@ -29,7 +29,7 @@ vi.mock('../../../api/ShortenApi.js', () => ({
     })
 }))
 
-const ShortenedTexts = ['Stackoverflow response #1', 'YmEBI280']
+const ShortenedTexts = ['Stackoverflow response #1', 'stackoverflow.com']
 
 describe('MyLinks component', () => {
     it('Renders correctly', () => {
