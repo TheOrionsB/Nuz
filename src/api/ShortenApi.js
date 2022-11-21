@@ -46,10 +46,10 @@ export const newSignedInShortened = async (toShorten) => {
     }
 }
 
-export const getShortened = async () => {
+export const getShortened = async (mode) => {
     const authStore = useAuthenticationStore()
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}${mode ? `/${mode}` : ''}`, {
             method: 'GET',
             headers: {
                 'authorization': authStore.genAuthenticationHeader()

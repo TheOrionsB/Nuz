@@ -24,6 +24,7 @@ import { ref } from 'vue';
 import NewLink from '../components/Dashboard/NewLink.vue'
 import MyLinks from '../components/Dashboard/MyLinks.vue';
 import DashBoardNavigationTitle from '../components/Titles/DashBoardNavigationTitle.vue';
+import DashHome from '../components/Dashboard/DashHome.vue';
 
 const authStore = useAuthenticationStore();
 const router = useRouter()
@@ -32,8 +33,8 @@ if (username.value === "") router.push({ path: '/' });
 const currentComponentIndex = ref(0);
 
 const subComponents = [
-    {name: "Home", icon: ['fas', 'house'], component: null},
-    {name: "New link", icon: ['fas', 'link'], component: NewLink},
+    {name: "Home", icon: ['fas', 'house'], component: DashHome},
+    {name: "New link", icon: ['fas', 'plus'], component: NewLink},
     {name: "My links", icon: ['fas', 'list'], component: MyLinks},
     {name: "Advanced", icon: ['fas', 'screwdriver'], component: null}
 ]
