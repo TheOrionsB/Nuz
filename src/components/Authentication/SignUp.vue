@@ -42,8 +42,8 @@
                 </p>
             </span>
             <div v-if="formInputs.passwordconf.value"
-                class="bg-transparent w-[50%] text-center self-center text-xl text-purple-300 border border-purple-300 rounded p-3">
-                <input v-if="!isSigningUp" :disabled="doPasswordsMatch ? false : true" class="" type="submit" value="Sign up" />
+                class="hover:bg-purple-900 hover:border-purple-900 hover:bg-opacity-90 duration-150 hover:rounded-lg hover:cursor-pointer hover:text-white bg-transparent w-[50%] text-center self-center text-xl text-purple-300 border border-purple-300 rounded p-3">
+                <input class="hover:cursor-pointer" v-if="!isSigningUp" :disabled="doPasswordsMatch ? false : true" type="submit" value="Sign up" />
                 <font-awesome-icon v-if="isSigningUp" :icon="['fas', 'fan']" class="animate-spin" />
             </div>
             <p class="text-red-300" v-if="error">An error occurred while registering :(</p>

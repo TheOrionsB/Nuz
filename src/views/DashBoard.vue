@@ -4,7 +4,7 @@
             <div class="flex flex-col w-1/4 space-y-5 max-sm:hidden">
                 <div class="bg-gray-900 bg-opacity-70 p-4 space-y-4 text-2xl rounded-md ">
                     <h2>{{ authStore.getUsername() }}</h2>
-                    <button class="text-red-300 text-lg" @click="authStore.logout()"><font-awesome-icon class="text-purple-300 text-inherit w-10" :icon="['fas', 'right-from-bracket']" />Log out</button>
+                    <button class="text-red-300 hover:text-black p-1 px-2 hover:bg-red-300 rounded ease-in-out duration-200 text-lg" @click="authStore.logout()"><font-awesome-icon class="text-purple-300 text-inherit w-10" :icon="['fas', 'right-from-bracket']" />Log out</button>
                 </div>
                 <div class="bg-gray-900 border-purple-400 border-2 border-opacity-50 bg-opacity-70 flex flex-col rounded-md">
                     <component :is="DashBoardNavigationTitle" :title="subComponents[index].name" :icon="subComponents[index].icon" @click="currentComponentIndex = index" v-for="(subComponent, index) in subComponents" :key="index" :class="{ ['bg-black bg-opacity-50']: currentComponentIndex === index }" class="hover:bg-black first-of-type:rounded-t-md last-of-type:rounded-b-md cursor-pointer hover:bg-opacity-50 transition-all ease-in-out duration-150"></component>

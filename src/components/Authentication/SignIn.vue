@@ -16,7 +16,7 @@
             </span>
             <div class="flex flex-col space-y-2" v-if="formInputs.password.value">
                 <div
-                    class="bg-transparent w-[50%] self-center text-center text-lg text-purple-300 border border-purple-300 rounded p-2">
+                    class="hover:bg-purple-900  hover:border-purple-900 hover:bg-opacity-90  duration-150 hover:rounded-lg hover:cursor-pointer hover:text-white bg-transparent w-[50%] self-center text-center text-lg text-purple-300 border border-purple-300 rounded p-2">
                     <input v-if="loggingIn === false" class="" type="submit" value="Let's try" />
                     <font-awesome-icon v-if="loggingIn === true" class="text-purple-300 animate-spin"
                         :icon="['fas', 'fan']" />
