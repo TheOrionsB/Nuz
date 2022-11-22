@@ -1,14 +1,14 @@
 <template>
     <div class="flex flex-col space-y-4 w-full items-center justify-center">
         <h2 class="text-2xl font-extralight w-1/2">Reset your password:</h2>
-        <form class="flex flex-col space-y-2 w-1/2">
-            <input
+        <form @submit.prevent="submitNewPass()" class="flex flex-col space-y-2 w-1/2">
+            <input v-model="oldpass"
                 class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                 type="password" placeholder="Old password or Recovery key" />
-            <input
+            <input v-model="newpass"
                 class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                 type="password" placeholder="New password" />
-            <input
+            <input v-model="newpassconf"
                 class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                 type="password" placeholder="Confirm new password" />
             <div
@@ -17,12 +17,59 @@
                 <font-awesome-icon v-if="isLoading === true" class="text-purple-300 animate-spin"
                     :icon="['fas', 'fan']" />
             </div>
+            <p v-if="passMismatch" class="text-red-400">Password mismatch</p>
+            <p v-if="passStatus.error.value === true" class="text-red-400">{{passStatus.reason.value}}</p>
+            <p v-if="!passStatus.error.value && passStatus.reason.value.length > 0" class="text-purple-400">{{passStatus.reason.value}}</p>
         </form>
     </div>
 </template>
 <script setup>
+import { updatePassword } from '@/api/UsersApi';
 import { ref } from 'vue';
+const passMismatch = ref(false);
 
+const passStatus = {
+    error: ref(false),
+    reason: ref("")
+}
+const oldpass = ref("");
+const newpass = ref("");
+const newpassconf = ref("");
+
+const submitNewPass = async () => {
+    if (newpass.value.length < 6) {
+        passStatus.error.value = true;
+        passStatus.error.reason = "Invalid new password. It should at least be 6 characters long";
+    }
+    if (newpass.value !== newpassconf.value) {
+        passMismatch.value = true;
+        return;
+    } else {
+        passMismatch.value = false;
+        const response = await updatePassword(oldpass.value, newpass.value);
+        switch (response) {
+            case 401:
+                passStatus.error.value = true;
+                passStatus.reason.value = "Invalid credentials. Please re-fill the form and try again";
+                break;
+            case 404:
+                passStatus.error.value = true;
+                passStatus.reason.value = "User not found, please try again later.";
+                break;
+            case 200:
+                passStatus.error.value = false;
+                passStatus.reason.value = "Password reset successfully";
+                break;
+            default:
+                passStatus.error.value = true;
+                passStatus.reason.value = "User not found, please try again later.";
+                break;
+        }
+        newpass.value = "";
+        newpassconf.value = "";
+        oldpass.value = "";
+    }
+}
 
 const isLoading = ref(false)
 </script>

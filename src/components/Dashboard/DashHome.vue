@@ -51,15 +51,15 @@
                         </span>
                         <span class="flex flex-row space-x-2 w-full items-center justify-end">
                             <button @click="copyToClipBoard(genFullLink(item.source))"
-                                class="bg-purple-700 rounded focus:animate-ping hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
+                                class="bg-purple-700 rounded hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'copy']" />
                             </button>
-                            <a target='_blank' :href="genFullLink(item.source)"
-                                class="bg-purple-700 rounded focus:animate-ping hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
+                            <a target="_blank" :href="genFullLink(item.source)"
+                                class="bg-purple-700 rounded hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
                             </a>
                             <button
-                                class="bg-red-700 rounded focus:animate-ping hover:bg-red-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
+                                class="bg-red-700 rounded hover:bg-red-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'trash']" />
                             </button>
                         </span>

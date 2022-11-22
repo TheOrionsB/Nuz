@@ -53,11 +53,20 @@ export const getBasicInfo = async () => {
     return ({ success: true, data: jsonResponse.data });
 }
 
-export const updatePassword = async (username, newPassword, token) => {
-    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user`, {
-        method: "PUT", headers: { 'authorization': `Bearer ${token}` }, body: {
-            password: newPassword
-        }
+export const updatePassword = async (oldPassword, newPassword) => {
+    // console.log(oldPassword, newPassword);
+    const authStore = useAuthenticationStore();
+    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/${authStore.getUsername()}`, {
+        method: "PUT",
+        headers: {
+            'authorization': authStore.genAuthenticationHeader(),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: authStore.getUsername(),
+            oldPassword: oldPassword,
+            newPassword: newPassword
+        })
     })
     return (response.status);
 }

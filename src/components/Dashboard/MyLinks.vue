@@ -87,6 +87,7 @@ const searchRef = ref(null);
 const shortenedList = ref([]);
 
 const isModalVisible = ref(false);
+
 const modalContent = {
     source: ref(""),
     target: ref(""),
