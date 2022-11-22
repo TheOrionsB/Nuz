@@ -46,10 +46,32 @@ export const newSignedInShortened = async (toShorten) => {
     }
 }
 
+export const deleteShortened = async (toDelete) => {
+    const authStore = useAuthenticationStore();
+    try {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/${toDelete}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': authStore.genAuthenticationHeader()
+            },
+            body: JSON.stringify({
+                username: authStore.getUsername()
+            })
+        });
+        const jsonResponse = await response.json();
+        if (response.status !== 200 || jsonResponse.success !== true) return ({success: false});
+        return ({success: true});
+    } catch (e) {
+        console.log(e);
+        return ({success: false})
+    }
+}
+
 export const getShortened = async (mode) => {
     const authStore = useAuthenticationStore()
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}${mode ? `/${mode}` : ''}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}${mode ? `/${mode}` : ''}?username=${authStore.getUsername()}`, {
             method: 'GET',
             headers: {
                 'authorization': authStore.genAuthenticationHeader()
@@ -64,7 +86,7 @@ export const getShortened = async (mode) => {
 export const getHitHistory = async () => {
     const authStore = useAuthenticationStore()
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}/hithistory`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}/hithistory?username=${authStore.getUsername()}`, {
             method: 'GET',
             headers: {
                 'authorization': authStore.genAuthenticationHeader()
