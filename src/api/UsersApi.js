@@ -70,3 +70,25 @@ export const updatePassword = async (oldPassword, newPassword) => {
     })
     return (response.status);
 }
+
+export const getRecoveryKey = async (password) => {
+    const authStore = useAuthenticationStore();
+    try {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/${authStore.getUsername()}/recoverykey/new?username=${authStore.getUsername()}`, {
+            method: 'POST',
+            headers: {
+                'authorization': authStore.genAuthenticationHeader(),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                password: password,
+                username: authStore.getUsername()
+            })
+        })
+        const jsonResponse = await response.json();
+        return ({ success: true, key: jsonResponse.key });
+    } catch (e) {
+        console.log(e)
+        return ({ success: false })
+    }
+}

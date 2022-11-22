@@ -23,7 +23,7 @@
                 </span>
                 <span class="flex flex-row w-full justify-start space-x-2">
                     <h4 class="font-extralight">Account at risk:</h4>
-                    <p class="text-purple-400">{{ info.data.hasRecoveryKey ? 'No' : 'Yes' }}</p>
+                    <p class="text-purple-400">{{ info.data.hasRecoveryKey ? 'No' : 'Yes (no recovery key)' }}</p>
                 </span>
             </div>
         </div>
