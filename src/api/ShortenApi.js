@@ -49,7 +49,7 @@ export const newSignedInShortened = async (toShorten) => {
 export const deleteShortened = async (toDelete) => {
     const authStore = useAuthenticationStore();
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/${toDelete}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${toDelete}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',

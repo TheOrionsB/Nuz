@@ -3,7 +3,7 @@ import MyLinks from '../../../components/Dashboard/MyLinks.vue';
 import { describe, expect, it, vi } from "vitest";
 import { createTestingPinia } from '@pinia/testing'
 import waitForExpect from 'wait-for-expect';
-import { getShortened } from '../../../api/ShortenApi.js';
+import { getShortened, deleteShortened } from '../../../api/ShortenApi.js';
 
 vi.mock('../../../api/ShortenApi.js', () => ({
     getShortened: vi.fn(() => {
@@ -26,6 +26,9 @@ vi.mock('../../../api/ShortenApi.js', () => ({
                 },
             ]
         })
+    }),
+    deleteShortened: vi.fn(() => {
+        return ({success: true})
     })
 }))
 
