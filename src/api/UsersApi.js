@@ -1,3 +1,4 @@
+import { useAuthenticationStore } from "../stores/AuthStore";
 
 export const doesUserExist = async (username) => {
     if (!username) return (null);
@@ -6,7 +7,8 @@ export const doesUserExist = async (username) => {
 }
 export const authenticate = async (inputs, action) => {
     try {
-         const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user${action === "authenticate" ? "/authenticate" : ""}`, {            method: "POST",
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user${action === "authenticate" ? "/authenticate" : ""}`, {
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -27,10 +29,28 @@ export const authenticate = async (inputs, action) => {
     }
 }
 
-export const deleteAccount = async (username, token) => {
-    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/${username}`, { method: "DELETE", headers: { 'authorization': `Bearer ${token}` } })
+export const deleteAccount = async () => {
+    const authStore = useAuthenticationStore();
+    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/${authStore.getUsername()}?username=${authStore.getUsername()}`, {
+        method: "DELETE",
+        headers: { 'authorization': authStore.genAuthenticationHeader() }
+    })
     if (response.status === 200) return (true);
     return (false);
+}
+
+export const getBasicInfo = async () => {
+    const authStore = useAuthenticationStore();
+    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/${authStore.getUsername()}/basic?username=${authStore.getUsername()}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': authStore.genAuthenticationHeader()
+        }
+    })
+    const jsonResponse = await response.json();
+    if (response.status !== 200) return ({ success: false, data: null });
+    return ({ success: true, data: jsonResponse.data });
 }
 
 export const updatePassword = async (username, newPassword, token) => {

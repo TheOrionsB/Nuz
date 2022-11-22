@@ -25,6 +25,7 @@ import NewLink from '../components/Dashboard/NewLink.vue'
 import MyLinks from '../components/Dashboard/MyLinks.vue';
 import DashBoardNavigationTitle from '../components/Titles/DashBoardNavigationTitle.vue';
 import DashHome from '../components/Dashboard/DashHome.vue';
+import DashAccount from '../components/Dashboard/DashAccount.vue';
 
 const authStore = useAuthenticationStore();
 const router = useRouter()
@@ -36,6 +37,6 @@ const subComponents = [
     {name: "Home", icon: ['fas', 'house'], component: DashHome},
     {name: "New link", icon: ['fas', 'plus'], component: NewLink},
     {name: "My links", icon: ['fas', 'list'], component: MyLinks},
-    {name: "Advanced", icon: ['fas', 'screwdriver'], component: null}
+    {name: "Account", icon: ['fas', 'user'], component: DashAccount}
 ]
 </script>
