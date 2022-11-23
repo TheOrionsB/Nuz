@@ -11,7 +11,7 @@
   </main>
 </template>
 <script setup>
-import { RouterView, useRouter } from 'vue-router'
+import { RouterView } from 'vue-router'
 import { onBeforeMount } from 'vue';
 import { loadFull } from "tsparticles";
 import ParticlesConfig from '@/assets/particlesconfig.json'
@@ -22,7 +22,6 @@ const particlesInit = async engine => {
   await loadFull(engine);
 };
 const authStore = useAuthenticationStore()
-const router = useRouter()
 onBeforeMount(async () => {
   if (document.cookie.split('=').length > 2) {
     const cookies = document.cookie.split(';');
@@ -37,13 +36,9 @@ onBeforeMount(async () => {
     if (response.status !== 200) {
       document.cookie = `username=${authStore.getUsername()};expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
       document.cookie = `token=${authStore.getToken()};expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-      router.push('/');
     } else {
       authStore.authenticateUser(cookies[1].split('=')[1], cookies[0].split('=')[1]);
-      router.push('/dashboard');
     }
-  } else {
-    router.push('/');
   }
 })
 </script>
