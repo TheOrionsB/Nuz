@@ -18,13 +18,15 @@
                     :icon="['fas', 'fan']" />
             </div>
             <p v-if="passMismatch" class="text-red-400">Password mismatch</p>
-            <p v-if="passStatus.error.value === true" class="text-red-400">{{passStatus.reason.value}}</p>
-            <p v-if="!passStatus.error.value && passStatus.reason.value.length > 0" class="text-purple-400">{{passStatus.reason.value}}</p>
+            <p v-if="passStatus.error.value === true" class="text-red-400">{{ passStatus.reason.value }}</p>
+            <p v-if="!passStatus.error.value && passStatus.reason.value.length > 0" class="text-purple-400">
+                {{ passStatus.reason.value }}</p>
         </form>
     </div>
 </template>
 <script setup>
 import { updatePassword } from '@/api/UsersApi';
+import { useToastStore } from '@/stores/ToastStore';
 import { ref } from 'vue';
 const passMismatch = ref(false);
 
@@ -35,6 +37,7 @@ const passStatus = {
 const oldpass = ref("");
 const newpass = ref("");
 const newpassconf = ref("");
+const toastStore = useToastStore();
 
 const submitNewPass = async () => {
     if (newpass.value.length < 6) {
@@ -49,20 +52,16 @@ const submitNewPass = async () => {
         const response = await updatePassword(oldpass.value, newpass.value);
         switch (response) {
             case 401:
-                passStatus.error.value = true;
-                passStatus.reason.value = "Invalid credentials. Please re-fill the form and try again";
+                toastStore.setError("Could not reset your password, either your password or recovery key is invalid.")
                 break;
             case 404:
-                passStatus.error.value = true;
-                passStatus.reason.value = "User not found, please try again later.";
+                toastStore.setError("We were unable to find your account. Log out and back it again.")
                 break;
             case 200:
-                passStatus.error.value = false;
-                passStatus.reason.value = "Password reset successfully";
+                toastStore.setSuccess("Password reset successfully !")
                 break;
             default:
-                passStatus.error.value = true;
-                passStatus.reason.value = "User not found, please try again later.";
+                toastStore.setError("An unknown error occurred while resetting your password.")
                 break;
         }
         newpass.value = "";

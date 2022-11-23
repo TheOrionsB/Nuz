@@ -97,6 +97,7 @@ import { onBeforeMount, ref } from 'vue';
 import { useAuthenticationStore } from '../../stores/AuthStore';
 import { Line } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale, } from 'chart.js'
+import { useToastStore } from '@/stores/ToastStore';
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale
 )
@@ -105,6 +106,7 @@ const currentShortenedList = ref([])
 const currentTopShortenedList = ref([])
 const chartLabels = ref([]);
 const chartDataSets = ref([]);
+const toastStore = useToastStore()
 
 const genFullLink = (suffix) => {
     return `http://${process.env.VUE_APP_REDIRECTION_BASEURL}/${suffix}`;
@@ -112,6 +114,7 @@ const genFullLink = (suffix) => {
 
 const copyToClipBoard = (toCopy) => {
     navigator.clipboard.writeText(toCopy)
+    toastStore.setSuccess('Link copied to your clipboard!');
 }
 
 onBeforeMount(async () => {

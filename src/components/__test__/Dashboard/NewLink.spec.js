@@ -73,7 +73,6 @@ describe('New link component', () => {
         wrapper.find('form').trigger('submit');
 
         await waitForExpect(() => {
-            expect(wrapper.text()).toContain("successfully");
             expect(router.push).toHaveBeenLastCalledWith({ path: '/dashboard' })
         })
 

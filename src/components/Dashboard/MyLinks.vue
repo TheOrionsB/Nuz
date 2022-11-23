@@ -81,7 +81,9 @@
 import { deleteShortened, getShortened } from '../../api/ShortenApi';
 import { onMounted, ref } from 'vue';
 import CustomModal from '../Modals/CustomModal.vue';
+import { useToastStore } from '../../stores/ToastStore';
 
+const toastStore = useToastStore()
 const searchInput = ref(null);
 const searchRef = ref(null);
 const shortenedList = ref([]);
@@ -111,7 +113,9 @@ const confirmLinkDeletion = async (source) => {
     if (success) {
         isModalVisible.value = !isModalVisible.value;
         shortenedList.value = await (await getShortened()).shortened;
+        toastStore.setSuccess("Link deleted!")
     } else {
+        toastStore.setError("An error occurred while deleting the link");
         console.log("error");
     }
 }
@@ -120,6 +124,7 @@ const genFullLink = (suffix) => {
     return `${process.env.VUE_APP_REDIRECTION_BASEURL}/${suffix}`;
 }
 const copyToClipBoard = (item) => {
+    toastStore.setSuccess("Link copied to your clipboard!")
     navigator.clipboard.writeText(item)
 }
 

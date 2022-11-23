@@ -60,6 +60,7 @@
 import { getNewShortened, newSignedInShortened } from '../../api/ShortenApi';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useToastStore } from '../../stores/ToastStore';
 
 const validateFormInputs = {
     target: ref(null),
@@ -75,6 +76,7 @@ const formInputs = {
 const isTargetURLFocused = ref(false);
 const isLinkCreating = ref(false);
 const error = ref(null);
+const toastStore = useToastStore()
 
 const router = useRouter()
 let timeSinceLastInput = 0;
@@ -91,11 +93,11 @@ const createLink = async () => {
     const result = await newSignedInShortened(formInputs);
     if (result.success) {
         isLinkCreating.value = false;
-        error.value = false;
+        toastStore.setSuccess("Link created successfully !")
         router.push({ path: '/dashboard' })
     } else {
+        toastStore.setError("An error occurred while creating the link");
         isLinkCreating.value = false;
-        error.value = true;
     }
 }
 const handleKeyDown = () => {

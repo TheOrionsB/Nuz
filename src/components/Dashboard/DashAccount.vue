@@ -87,20 +87,23 @@ import EditPassword from './AccountActions/EditPassword.vue'
 import GetRecovery from './AccountActions/GetRecovery.vue';
 import CustomModal from '../Modals/CustomModal.vue';
 import { useRouter } from 'vue-router';
+import { useToastStore } from '../../stores/ToastStore';
 
 const authStore = useAuthenticationStore();
 const info = ref({});
 const componentState = ref("none")
 const router = useRouter();
+const toastStore = useToastStore();
 const isAccDeletionModalVisible = ref(false);
 
 const deleteActiveAccount = async () => {
     const response = await deleteAccount();
     if (response) {
         authStore.authenticateUser("", "");
+        toastStore.setSuccess("Account deleted!");
         router.push('/');
     } else {
-        console.log("Oops, could not delete the account");
+        toastStore.setError("An error occurred while deleting your account");
     }
 }
 
