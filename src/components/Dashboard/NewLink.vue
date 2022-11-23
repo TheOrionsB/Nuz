@@ -40,7 +40,7 @@
                 <label class="">Password protected (Optionnal)</label>
                 <input v-model="formInputs.password.value"
                     class="w-full p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
-                    type="text" placeholder="Password" />
+                    type="password" placeholder="Password" />
             </span>
             <span class="flex flex-col space-y-1">
                 <label class="">Expiration (Optionnal)</label>
