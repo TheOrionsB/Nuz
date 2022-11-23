@@ -178,7 +178,7 @@ const confirmLinkDeletion = async (source) => {
 }
 
 const genFullLink = (suffix) => {
-    return `http://${process.env.VUE_APP_REDIRECTION_BASEURL}/${suffix}`;
+    return `${process.env.VUE_APP_REDIRECTION_BASEURL}/${suffix}`;
 }
 
 const copyToClipBoard = (toCopy) => {

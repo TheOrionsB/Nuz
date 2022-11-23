@@ -12,7 +12,6 @@ library.add([faFan, faList, faHouse, faLink, faScrewdriver, faRightFromBracket, 
 
 const HomeView = () => import('./views/HomeView.vue');
 const AuthView = () => import('./views/AuthView.vue');
-const AboutView = () => import('./views/AboutView.vue');
 const DashboardView = () => import('./views/DashBoard.vue')
 const LinkNotFound = () => import('./views/LinkNotFound.vue')
 const ProtectedLink = () => import('./views/ProtectedLink.vue')
@@ -20,7 +19,6 @@ const ProtectedLink = () => import('./views/ProtectedLink.vue')
 const routes = [
     { path: '/', component: HomeView },
     { path: '/login', component: AuthView },
-    { path: '/about', component: AboutView },
     { path: '/dashboard', component: DashboardView },
     { path: '/nf', component: LinkNotFound},
     { path: '/pp', component: ProtectedLink}

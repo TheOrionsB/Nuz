@@ -15,11 +15,11 @@ const buildNewShortenedData = (formInputs) => {
 
 export const getNewShortened = async () => {
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/new`, { method: 'GET'});
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/shorten/new`, { method: 'GET' });
         const jsonResponse = await response.json();
-        return ({success: true, shortened: `https://nuz.sh/${jsonResponse.shortened}`})
+        return ({ success: true, shortened: `${process.env.VUE_APP_REDIRECTION_BASEURL}/${jsonResponse.shortened}` })
     } catch (e) {
-        return ({success: false});
+        return ({ success: false });
     }
 }
 
@@ -27,7 +27,7 @@ export const newSignedInShortened = async (toShorten) => {
     const authStore = useAuthenticationStore();
     const toShortenFormatted = buildNewShortenedData(toShorten);
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/shorten`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const newSignedInShortened = async (toShorten) => {
 export const deleteShortened = async (toDelete) => {
     const authStore = useAuthenticationStore();
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${toDelete}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/shorten/${toDelete}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -60,18 +60,18 @@ export const deleteShortened = async (toDelete) => {
             })
         });
         const jsonResponse = await response.json();
-        if (response.status !== 200 || jsonResponse.success !== true) return ({success: false});
-        return ({success: true});
+        if (response.status !== 200 || jsonResponse.success !== true) return ({ success: false });
+        return ({ success: true });
     } catch (e) {
         console.log(e);
-        return ({success: false})
+        return ({ success: false })
     }
 }
 
 export const getShortened = async (mode) => {
     const authStore = useAuthenticationStore()
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}${mode ? `/${mode}` : ''}?username=${authStore.getUsername()}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/shorten/${authStore.getUsername()}${mode ? `/${mode}` : ''}?username=${authStore.getUsername()}`, {
             method: 'GET',
             headers: {
                 'authorization': authStore.genAuthenticationHeader()
@@ -86,7 +86,7 @@ export const getShortened = async (mode) => {
 export const getHitHistory = async () => {
     const authStore = useAuthenticationStore()
     try {
-        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/${authStore.getUsername()}/hithistory?username=${authStore.getUsername()}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/shorten/${authStore.getUsername()}/hithistory?username=${authStore.getUsername()}`, {
             method: 'GET',
             headers: {
                 'authorization': authStore.genAuthenticationHeader()
@@ -100,16 +100,19 @@ export const getHitHistory = async () => {
 }
 
 export const requestRedirection = async (password, suffix) => {
-    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/targetrequest/${suffix}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            password: password
+    try {
+        const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/shorten/targetrequest/${suffix}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                password: password
+            })
         })
-    })
-    const jsonResponse = await response.json();
-    if (response.status === 200) return window.open(jsonResponse.target, "_self");
-    return ({success: false});
+        const jsonResponse = await response.json();
+        return ({ success: true, target: jsonResponse.target });
+    } catch (e) {
+        return ({ success: false, target: null });
+    }
 }

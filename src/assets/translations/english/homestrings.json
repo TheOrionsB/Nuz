@@ -34,7 +34,6 @@
     "signup": "Sign up",
     "headerTitle": "Nuz",
     "Navigation": [
-        {"pretty": "Home", "path": "/"},
-        {"pretty": "About", "path": "/about"}
+        {"pretty": "Home", "path": "/"}
     ]
 }
