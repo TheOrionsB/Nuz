@@ -41,7 +41,9 @@
                         </span>
                         <span class="flex flex-row space-x-2 w-full items-center">
                             <p>Name:</p>
-                            <h3 class="text-purple-300">{{ item.name.length > 12 ? `${item.name.slice(0, 12)}...`: item.name }}</h3>
+                            <h3 class="text-purple-300">{{ item.name.length > 12 ? `${item.name.slice(0, 12)}...` :
+                                    item.name
+                            }}</h3>
                         </span>
                         <span class="flex w-full flex-row">
                             <p class="mr-2">Target:</p>
@@ -58,7 +60,7 @@
                                 class="bg-purple-700 rounded hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
                             </a>
-                            <button
+                            <button @click="initiateDeleteModal(item.source), isModalVisible = !isModalVisible"
                                 class="bg-red-700 rounded hover:bg-red-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'trash']" />
                             </button>
@@ -89,15 +91,50 @@
             <p class="text-3xl font-extralight">Navigate to 'New link' to create your first link and have a summuary
                 right here :)</p>
         </div>
+        <CustomModal :visible="isModalVisible">
+            <div class="h-full w-full flex flex-col items-center justify-between p-4">
+                <h2 class="text-red-500 text-4xl font-bold">Hol up ! Are you sure about that ?</h2>
+                <p class="text-red-400 text-xl">Once deleted, this link will redirect to a Nuz 404 page until
+                    reassigned randomly.</p>
+                <ul class="list-disc">
+                    <li class="text-xl flex flex-row space-x-2">
+                        <p>Source:</p>
+                        <a class="text-purple-400">{{ genFullLink(modalContent.source.value) }}</a>
+                    </li>
+                    <li class="text-xl flex flex-row space-x-2">
+                        <p>Target:</p>
+                        <a class="text-purple-400">{{ modalContent.target.value }}</a>
+                    </li>
+                    <li class="text-xl flex flex-row space-x-2">
+                        <p>Hits:</p>
+                        <p class="text-purple-400">{{ modalContent.hits.value }}</p>
+                    </li>
+                </ul>
+                <p class="text-red-400 text-xl">Are you sure you want to proceed ?</p>
+                <div class="flex flex-row space-x-2 justify-center w-full">
+                    <button @click="confirmLinkDeletion(modalContent.source.value)"
+                        class="p-2 bg-red-700 hover:bg-red-300 hover:text-black duration-150 ease-in-out rounded text-xl w-1/4 flex flex-row justify-start items-center space-x-1">
+                        <font-awesome-icon class="w-1/6" :icon="['fas', 'trash']" />
+                        <p>Delete this link</p>
+                    </button>
+                    <button @click="isModalVisible = !isModalVisible"
+                        class="p-2 bg-purple-700 hover:bg-purple-300 hover:text-black duration-150 ease-in-out rounded text-xl w-1/4 flex flex-row justify-start items-center space-x-1">
+                        <font-awesome-icon class="w-1/6" :icon="['fas', 'right-from-bracket']" />
+                        <p>Nevermind</p>
+                    </button>
+                </div>
+            </div>
+        </CustomModal>
     </div>
 </template>
 <script setup>
-import { getShortened, getHitHistory } from '@/api/ShortenApi';
+import { getShortened, getHitHistory, deleteShortened } from '@/api/ShortenApi';
 import { onBeforeMount, ref } from 'vue';
 import { useAuthenticationStore } from '../../stores/AuthStore';
 import { Line } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale, } from 'chart.js'
 import { useToastStore } from '@/stores/ToastStore';
+import CustomModal from '../Modals/CustomModal.vue';
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale
 )
@@ -107,6 +144,38 @@ const currentTopShortenedList = ref([])
 const chartLabels = ref([]);
 const chartDataSets = ref([]);
 const toastStore = useToastStore()
+
+const isModalVisible = ref(false)
+const modalContent = {
+    source: ref(""),
+    target: ref(""),
+    hits: ref(0),
+}
+
+const initiateDeleteModal = (toDelete) => {
+    console.log("true");
+    const shortenIdx = currentShortenedList.value.findIndex((item) => item.source === toDelete);
+    if (shortenIdx !== -1) {
+        modalContent.source.value = toDelete;
+        modalContent.target.value = currentShortenedList.value[shortenIdx].target;
+        modalContent.hits.value = currentShortenedList.value[shortenIdx].stats.nHit;
+    } else {
+        toastStore.setError("Couldn't initiate link deletion. Please try again later.")
+    }
+}
+
+const confirmLinkDeletion = async (source) => {
+    const success = await deleteShortened(source);
+    if (success) {
+        isModalVisible.value = !isModalVisible.value;
+        currentShortenedList.value = await (await getShortened()).shortened;
+        currentTopShortenedList.value = await (await getShortened("top")).shortened;
+        toastStore.setSuccess("Link deleted!")
+    } else {
+        toastStore.setError("An error occurred while deleting the link");
+        console.log("error");
+    }
+}
 
 const genFullLink = (suffix) => {
     return `http://${process.env.VUE_APP_REDIRECTION_BASEURL}/${suffix}`;
