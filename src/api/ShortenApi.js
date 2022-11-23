@@ -98,3 +98,18 @@ export const getHitHistory = async () => {
         return ({ success: false })
     }
 }
+
+export const requestRedirection = async (password, suffix) => {
+    const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT }/shorten/targetrequest/${suffix}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            password: password
+        })
+    })
+    const jsonResponse = await response.json();
+    if (response.status === 200) return window.open(jsonResponse.target, "_self");
+    return ({success: false});
+}
