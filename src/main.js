@@ -6,9 +6,10 @@ import Particles from "vue3-particles";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFan, faHouse, faLink, faList, faPlus, faRightFromBracket, faCopy, faArrowUpRightFromSquare, faUser, faKey, faLock, faTrash, faScrewdriver, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons'; 
 import './assets/tailwind.css'
 
-library.add([faFan, faList, faHouse, faLink, faScrewdriver, faRightFromBracket, faCopy, faArrowUpRightFromSquare, faUser, faKey, faLock, faTrash, faMagnifyingGlass, faPlus]);
+library.add([faFan, faList, faHouse, faLink, faGithub, faScrewdriver, faRightFromBracket, faCopy, faArrowUpRightFromSquare, faUser, faKey, faLock, faTrash, faMagnifyingGlass, faPlus]);
 
 const HomeView = () => import('./views/HomeView.vue');
 const AuthView = () => import('./views/AuthView.vue');

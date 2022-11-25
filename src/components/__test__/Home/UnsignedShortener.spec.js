@@ -10,16 +10,9 @@ vi.mock('vue-router', () => ({
 describe('UnsignedShortener', () => {
     it('Renders properly', () => {
         const wrapper = mount(HeaderGlobalVue)
-        expect(wrapper.find("h2").text()).toContain(HomeStrings.unsignedShortener.usHeading);
-        expect(wrapper.find("input[type=text]").attributes('placeholder')).toContain(HomeStrings.unsignedShortener.usInputPlaceholder)
-        expect(wrapper.find("input[type=submit]").attributes('value')).toContain(HomeStrings.unsignedShortener.usSubmitValue)
-    })
-    it('Submits correctly', () => {
-        const wrapper = mount(HeaderGlobalVue);
-        wrapper.find('input[type=text]').setValue("http://google.com");
-        expect(console.assert(true, ''));
-        wrapper.find('form').trigger('submit');
-        expect(console.assert(true, 'Form submitted with target: http://google.com'))
+        expect(wrapper.text()).toContain("open source")
+        expect(wrapper.text()).toContain("Contribute")
+        expect(wrapper.text()).toContain("Submit an issue")
     })
 })
 
