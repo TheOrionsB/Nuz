@@ -6,11 +6,7 @@ COPY yarn.lock ./
 
 RUN yarn
 COPY . ./
-<<<<<<< HEAD
-RUN yarn build
-=======
 RUN yarn build --mode production
->>>>>>> main
 
 
 FROM nginx:latest as run
