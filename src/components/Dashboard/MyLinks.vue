@@ -13,7 +13,7 @@
                 placeholder="Search links... (⌘+K or Windows+K) " />
         </div>
         <div class="w-full p-4 text-xl">
-            <ul class="space-y-2 overflow-y-scroll">
+            <ul class="space-y-2">
                 <li class="flex flex-row items-center justify-between border-b border-b-gray-800 last-of-type:border-none p-2"
                     v-for="(item, index) in shortenedList" :key="index">
                     <div class="flex flex-row w-2/3 justify-start space-x-4">
