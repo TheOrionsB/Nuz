@@ -19,8 +19,8 @@ const ProtectedLink = () => import('./views/ProtectedLink.vue')
 
 const routes = [
     { path: '/', component: HomeView },
-    { path: '/login', component: AuthView },
-    { path: '/dashboard', component: DashboardView },
+    { path: '/auth', component: AuthView },
+    { path: '/dash', component: DashboardView },
     { path: '/nf', component: LinkNotFound},
     { path: '/pp', component: ProtectedLink}
 

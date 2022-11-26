@@ -1,5 +1,4 @@
-## Nuz
-
+## Nuz | [Try the app](https://nuz.sh)
 Nuz is a simple project that I develop to make myself comfortable with VueJS version 3.
 It's yet another URL shortener that may be deployed one day.
 

@@ -17,7 +17,7 @@ describe('HomeCTA', () => {
                 plugins: [ createTestingPinia({ createSpy: vi.fn }) ],
                 stubs: ['FontAwesomeIcon']
             }
-        });        expect(wrapper.get("a[name='mainCTA']").text()).toContain(HomeStrings.CTA.mainCTA)
-        expect(wrapper.get("a[name='subCTA']").text()).toContain(HomeStrings.CTA.subCTA)
+        });        expect(wrapper.findAll("router-link")[0].text()).toContain(HomeStrings.CTA.mainCTA)
+        expect(wrapper.findAll("router-link")[1].text()).toContain(HomeStrings.CTA.subCTA)
     })
 })

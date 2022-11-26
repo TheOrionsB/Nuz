@@ -6,11 +6,11 @@
       <router-link class="text-white" v-for="(item, index) in HomeStrings.Navigation" :key="index" :to="item.path">{{ item.pretty }}</router-link>
     </div>
     <div v-if="username === ''" class="flex flex-row space-x-1 lg:space-x-4 items-center">
-      <router-link name="login" to="/login" class="text-gray-300 p-2 hover:bg-purple-900 hover:text-white hover:rounded duration-150">{{ HomeStrings.login }}</router-link>
-      <router-link name="sign up" to="/login?signup=1" class="hover:bg-purple-900 hover:border-purple-900 hover:text-white hover:rounded duration-150 text-purple-300 border border-purple-300 rounded p-2">{{ HomeStrings.signup }}</router-link>
+      <router-link name="login" to="/auth?signup=0" class="text-gray-300 p-2 hover:bg-purple-900 hover:text-white hover:rounded duration-150">{{ HomeStrings.login }}</router-link>
+      <router-link name="sign up" to="/auth?signup=1" class="hover:bg-purple-900 hover:border-purple-900 hover:text-white hover:rounded duration-150 text-purple-300 border border-purple-300 rounded p-2">{{ HomeStrings.signup }}</router-link>
     </div>
     <div v-if="username !== ''" class="flex flex-row space-x-1 lg:space-x-4 items-center">
-      <router-link name="login" to="/dashboard" class="text-gray-300 underline">{{ authStore.getUsername() }}</router-link>
+      <router-link name="login" to="/dash" class="text-gray-300 underline">{{ authStore.getUsername() }}</router-link>
     </div>
   </header>
 </template>

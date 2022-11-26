@@ -4,12 +4,12 @@
             <div
                 class="flex flex-col justify-center items-center p-10 w-2/6 bg-purple-900 text-white bg-opacity-90 space-y-4">
                 <div class="text-center" v-if="formState === 'signin'">
-                    <h2  class="text-3xl font-bold">Welcome back!</h2>
-                    <a class="text-gray-400" href="/login?signup=1">I don't have an account :(</a>
+                    <h2 class="text-3xl font-bold">Welcome back!</h2>
+                    <router-link class="text-gray-400" to="/auth?signup=1">I don't have an account :(</router-link>
                 </div>
                 <div class="text-center" v-if="formState === 'signup'">
-                    <h2  class="text-3xl font-bold">Become one of us!</h2>
-                    <a class="text-gray-400" href="/login">Duh, I have an account</a>
+                    <h2 class="text-3xl font-bold">Become one of us!</h2>
+                    <router-link class="text-gray-400" to="/auth?signup=0">Duh, I have an account</router-link>
                 </div>
             </div>
             <SignIn v-if="formState === 'signin'" />
@@ -18,15 +18,20 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import SignIn from '@/components/Authentication/SignIn.vue';
 import SignUp from '@/components/Authentication/SignUp.vue';
 import { useRoute } from 'vue-router';
 /**
  * Determines if this view should render the sign in or sign up form
  */
-let formState = ref("signin");
 const route = useRoute()
-route.query.signup ? formState = "signup" : formState = "signin";
+let formState = ref(Number(route.query.signup) === 1 ? "signup" : "signin");
+watch(route, () => {
+    if (Number(route.query.signup) === 1)
+        formState.value = "signup"
+    else
+        formState.value = "signin"
+})
 
 </script>
