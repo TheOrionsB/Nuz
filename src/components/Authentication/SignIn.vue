@@ -53,7 +53,7 @@ const authenticateUser = async () => {
         authStore.authenticateUser(formInputs.username.value.content, response.token);
         document.cookie = `token=${response.token};expires=${new Date(Date.now() + 18000000)};path=/`;
         document.cookie = `username=${formInputs.username.value.content};expires=${new Date(Date.now() + 18000000)};path=/`;
-        router.push({ path: '/dashboard' });
+        router.push({ path: '/dash' });
     }
 }
 </script>

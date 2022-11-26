@@ -118,7 +118,7 @@ const registerUser = async () => {
     const response = await authenticate({ username: formInputs.username.value, password: formInputs.password.value }, "register")
     if (response.success) {
         authenticationStore.authenticateUser(formInputs.username.value, response.token);
-        router.push({ path: '/dashboard' });
+        router.push({ path: '/dash' });
     }
     else {
         isSigningUp.value = false;
