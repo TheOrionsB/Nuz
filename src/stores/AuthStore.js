@@ -29,9 +29,6 @@ export const useAuthenticationStore = defineStore('authentication', () => {
      * @public
      * Methods
      */
-    const retrieve = () => {
-        console.log("retrieve the previous session")
-    }
 
     const authenticateUser = (username, token) => {
         setUsername(username);

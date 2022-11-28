@@ -99,14 +99,11 @@ const modalContent = {
 }
 
 const initiateDeleteModal = (toDelete) => {
-    console.log("true");
     const shortenIdx = shortenedList.value.findIndex((item) => item.source === toDelete);
     if (shortenIdx !== -1) {
         modalContent.source.value = toDelete;
         modalContent.target.value = shortenedList.value[shortenIdx].target;
         modalContent.hits.value = shortenedList.value[shortenIdx].stats.nHit;
-    } else {
-        console.log("god damnit")
     }
 }
 
@@ -118,7 +115,6 @@ const confirmLinkDeletion = async (source) => {
         toastStore.setSuccess("Link deleted!")
     } else {
         toastStore.setError("An error occurred while deleting the link");
-        console.log("error");
     }
 }
 
@@ -145,6 +141,5 @@ onMounted(async () => {
         }
     });
     shortenedList.value = await (await getShortened()).shortened
-    console.log(shortenedList.value);
 })
 </script>
