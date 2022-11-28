@@ -1,23 +1,23 @@
 <template>
-    <div class="flex flex-col h-full w-full overflow-y-scroll p-[5%] space-y-4">
-        <div class="space-y-1 flex flex-col self-start">
-            <h1 class="font-bold text-4xl ">My links</h1>
-            <p class="text-purple-300 text-2xl">Find every link you have registered. You can delete them, copy the link
+    <div class="flex flex-col h-full w-full overflow-y-scroll  lg:p-[5%] max-lg:space-y-1 lg:space-y-4">
+        <div class="space-y-1 flex flex-col self-start max-lg:p-[5%] max-lg:py-[2%]">
+            <h1 class="font-bold max-lg:text-2xl lg:text-4xl ">My links</h1>
+            <p class="text-purple-300 max-lg:text-lg lg:text-2xl">Find every link you have registered. You can delete them, copy the link
                 in your clipboard and access the target link</p>
         </div>
         <div
-            class="w-[90%] focus:outline-none focus:border-none focus:outline-purple-400 text-lg bg-transparent flex flex-row items-center border-b-purple-400 border-b p-4 text-purple-300">
-            <font-awesome-icon class="text-opacity-50 text-gray-500 w-14" :icon="['fas', 'magnifying-glass']" />
+            class="w-[90%] self-center space-x-1 focus:outline-none focus:border-none focus:outline-purple-400 text-lg bg-transparent flex flex-row items-center border-b-purple-400 border-b p-4 text-purple-300">
+            <font-awesome-icon class="text-opacity-50 text-gray-500" :icon="['fas', 'magnifying-glass']" />
             <input id="search" ref="searchRef" v-model="searchInput" type="text"
                 class="w-full border-none bg-transparent outline-none"
                 placeholder="Search links... (⌘+K or Windows+K) " />
         </div>
         <div class="w-full p-4 text-xl">
             <ul class="space-y-2">
-                <li class="flex flex-row items-center justify-between border-b border-b-gray-800 last-of-type:border-none p-2"
+                <li class="flex flex-row items-center justify-between border-b border-b-gray-800 last-of-type:border-none max-lg:p-1 lg:p-2"
                     v-for="(item, index) in filteredShortened" :key="index">
-                    <div class="flex flex-row w-2/3 justify-start space-x-4">
-                        <p class="w-1/2">{{ item.name }}</p>
+                    <div class="flex flex-row max-lg:w-1/2 lg:w-2/3 justify-start space-x-4">
+                        <p class="max-lg:text-lg lg:w-1/2">{{ item.name }}</p>
                         <div class="max-sm:hidden flex w-1/2 flex-row">
                             <a class=" underline text-purple-500" v-bind:href="genFullLink(item.source)">{{
                                     item.target.split('/')[2].length > 20 ? item.target.split('/')[2].slice(0, 20) + '...' :
@@ -25,7 +25,7 @@
                             }}</a>
                         </div>
                     </div>
-                    <div class="space-x-2 class flex flex-row w-2/5 justify-end">
+                    <div class="space-x-2 class flex flex-row max-lg:w-1/2 lg:w-2/5 justify-end">
                         <button @click="copyToClipBoard(genFullLink(item.source))"
                             class="bg-purple-700 rounded hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                             <font-awesome-icon :icon="['fas', 'copy']" />

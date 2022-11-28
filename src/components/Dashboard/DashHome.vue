@@ -2,13 +2,13 @@
     <div class="flex flex-col space-y-4 lg:p-8 h-full w-full overflow-y-scroll">
         <div v-if="currentShortenedList.length > 0" class="flex flex-col h-full">
             <div class="flex flex-row max-lg:flex-col justify-evenly items-center">
-                <div class="flex flex-col p-8 w-full">
-                    <h1 class="text-4xl font-light text-purple-500">Welcome home, {{ authStore.getUsername() }}</h1>
-                    <h2 class="text-2xl font-extralight">{{ currentShortenedList.length }} links up and running</h2>
+                <div class="flex flex-col max-lg:p-2 lg:p-8 w-full">
+                    <h1 class="max-lg:text-xl lg:text-4xl font-light text-purple-500">Welcome home, {{ authStore.getUsername() }}</h1>
+                    <h2 class="max-lg:text-lg lg:text-2xl font-extralight">{{ currentShortenedList.length }} links up and running</h2>
                 </div>
                 <div v-if="currentShortenedList.slice(-1)[0]"
                     class="w-full lg:p-4  max-lg:hidden flex flex-col justify-center rounded-lg bg-gray-800">
-                    <h2 class="text-2xl font-extralight">Your latest link:</h2>
+                    <h2 class="max-lg:text-xl text-2xl font-extralight">Your latest link:</h2>
                     <div class="text-xl">
                         <span class="flex flex-row space-x-2">
                             <p>Name:</p>
@@ -29,17 +29,17 @@
                 </div>
             </div>
             <div class="p-2 lg:px-8 space-y-2">
-                <h3 class="text-2xl font-extralight">Your most popular links:</h3>
+                <h3 class="max-lg:text-md lg:text-2xl font-extralight">Your most popular links:</h3>
                 <ul class="font-light">
                     <li v-for="(item, idx) in currentTopShortenedList" :key="idx"
-                        class="hover:bg-gray-700 ease-in-out duration-300 flex flex-row p-4 justify-between items-center first-of-type:border-t-transparent border-b border-b-transparent border-t-2 border-purple-300 border-opacity-40 space-x-4 text-xl">
-                        <span class="flex flex-row w-full items-center">
-                            <h4 class="text-2xl w-12 text-center text-purple-200 font-bold">
+                        class="hover:bg-gray-700 ease-in-out duration-300 flex flex-row max-lg:p-1 lg:p-4 justify-between items-center first-of-type:border-t-transparent border-b border-b-transparent border-t-2 border-purple-300 border-opacity-40 space-x-4 max-lg:text-md lg:text-xl">
+                        <span class="flex flex-row lg:w-full items-center">
+                            <h4 class="max-lg:text-lg text-2xl lg:w-12 text-center text-purple-200 font-bold">
                                 {{ idx + 1 }}
                             </h4>
                             <h3 class="max-lg:hidden">(Hits: {{ item.stats.nHit }})</h3>
                         </span>
-                        <span class="lg:hidden sm:visible flex flex-row space-x-2 w-full items-center">
+                        <span class="lg:hidden sm:visible flex flex-row space-x-2  max-lg:w-1/3 lgw-full items-center">
                             <h3 class="text-purple-300">{{ item.name.length > 10 ? `${item.name.slice(0, 10)}...` :
                             item.name
                             }}</h3>
@@ -57,7 +57,7 @@
                             item.target.split('/')[2]
                             }}</a>
                         </span>
-                        <span class="flex flex-row space-x-2 w-full items-center justify-end">
+                        <span class="flex flex-row space-x-2 max-lg:w-1/2 lg:w-full items-center justify-end">
                             <button @click="copyToClipBoard(genFullLink(item.source))"
                                 class="bg-purple-700 rounded hover:bg-purple-300 hover:text-black duration-150 ease-in-out p-2 w-1/4 text-center text-lg">
                                 <font-awesome-icon :icon="['fas', 'copy']" />
@@ -75,7 +75,7 @@
                 </ul>
             </div>
             <div class="">
-                <h3 class="text-2xl font-extralight">Link usage over time:</h3>
+                <h3 class="max-lg:text-xl lg:text-2xl font-extralight">Link usage over time:</h3>
                 <Line :width="'50%'" :height="300" :chart-data="{
                     datasets: [
                         {

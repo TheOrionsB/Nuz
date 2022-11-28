@@ -1,6 +1,9 @@
 <template>
-    <div v-if="username !== ''" class="text-white space-y-10 p-[7%] px-[1%] qhd:p-[5%] h-full max-sm:px-1 max-sm:py-[20%]">
-        <div class="flex flex-row w-full lg:space-x-10 h-full">
+    <div v-if="username !== ''" class="text-white space-y-10 p-[7%] px-[1%] qhd:p-[5%] h-full max-sm:px-1 max-sm:py-[3%]">
+        <div class="flex flex-row max-lg:flex-col w-full lg:space-x-10 h-full">
+            <div class="flex lg:hidden flex-row justify-center">
+                <component :is="DashBoardNavigationTitle" :title="subComponents[index].name" :icon="subComponents[index].icon" @click="currentComponentIndex = index" v-for="(subComponent, index) in subComponents" :key="index" :class="{ ['bg-black bg-opacity-50']: currentComponentIndex === index }" class="hover:bg-black first-of-type:rounded-t-md last-of-type:rounded-b-md cursor-pointer hover:bg-opacity-50 transition-all ease-in-out duration-150"></component>
+            </div>
             <div class="flex flex-col w-1/4 space-y-5 max-lg:hidden">
                 <div class="bg-gray-900 bg-opacity-70 p-4 space-y-4 text-2xl rounded-md ">
                     <h2>{{ authStore.getUsername() }}</h2>

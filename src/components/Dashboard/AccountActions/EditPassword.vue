@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col space-y-4 w-full items-center justify-center">
-        <h2 class="text-2xl font-extralight w-1/2">Reset your password:</h2>
-        <form @submit.prevent="submitNewPass()" class="flex flex-col space-y-2 w-1/2">
+        <h2 class="text-2xl font-extralight max-lg:w-full lg:w-1/2">Reset your password:</h2>
+        <form @submit.prevent="submitNewPass()" class="flex flex-col space-y-2 lg:w-1/2 max-lg:w-full">
             <input v-model="oldpass"
                 class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                 type="password" placeholder="Old password or Recovery key" />
