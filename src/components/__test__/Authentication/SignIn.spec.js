@@ -73,7 +73,7 @@ describe('SignInComponent', () => {
         await wrapper.findAll("form")[0].trigger('submit');
         await waitForExpect(() => {
             expect(authStore.authenticateUser).toHaveBeenCalled();
-            expect(router.push).toHaveBeenCalledWith({ path: '/dashboard' });
+            expect(router.push).toHaveBeenCalledWith({ path: '/dash' });
         })
     })
     it('Tries to login with invalid credentials', async () => {

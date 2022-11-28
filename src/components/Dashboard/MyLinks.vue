@@ -18,9 +18,9 @@
                     v-for="(item, index) in shortenedList" :key="index">
                     <div class="flex flex-row w-2/3 justify-start space-x-4">
                         <p class="w-1/2">{{ item.name }}</p>
-                        <div class="flex w-1/2 flex-row">
+                        <div class="max-sm:hidden flex w-1/2 flex-row">
                             <a class=" underline text-purple-500" v-bind:href="genFullLink(item.source)">{{
-                                    item.target.split('/')[2]
+                                    item.target.split('/')[2].length > 20 ? item.target.split('/')[2].slice(0,20) + '...' : item.target.split('/')[2]
                             }}</a>
                         </div>
                     </div>
