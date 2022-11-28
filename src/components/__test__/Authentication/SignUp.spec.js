@@ -124,9 +124,7 @@ describe("SignUp component", () => {
         await nextTick(() => expect(wrapper.findAll('input[type=password]').length).toBe(2))
         await wrapper.findAll("input[type=password]")[1].setValue('pass2');
 
-        const inputWrapper = wrapper.find('input[type=submit]');
-        isDisabled = inputWrapper.element.disabled === true;
-        expect(isDisabled).toBe(true);
+        expect(wrapper.text()).toContain('mismatch');
     });
 
     it('registers a new user', async () => {
