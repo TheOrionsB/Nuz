@@ -8,19 +8,20 @@
         <div
             class="w-[90%] focus:outline-none focus:border-none focus:outline-purple-400 text-lg bg-transparent flex flex-row items-center border-b-purple-400 border-b p-4 text-purple-300">
             <font-awesome-icon class="text-opacity-50 text-gray-500 w-14" :icon="['fas', 'magnifying-glass']" />
-            <input id="search" ref="searchRef" @change="logValue" v-model="searchInput" type="text"
+            <input id="search" ref="searchRef" v-model="searchInput" type="text"
                 class="w-full border-none bg-transparent outline-none"
                 placeholder="Search links... (⌘+K or Windows+K) " />
         </div>
         <div class="w-full p-4 text-xl">
             <ul class="space-y-2">
                 <li class="flex flex-row items-center justify-between border-b border-b-gray-800 last-of-type:border-none p-2"
-                    v-for="(item, index) in shortenedList" :key="index">
+                    v-for="(item, index) in filteredShortened" :key="index">
                     <div class="flex flex-row w-2/3 justify-start space-x-4">
                         <p class="w-1/2">{{ item.name }}</p>
                         <div class="max-sm:hidden flex w-1/2 flex-row">
                             <a class=" underline text-purple-500" v-bind:href="genFullLink(item.source)">{{
-                                    item.target.split('/')[2].length > 20 ? item.target.split('/')[2].slice(0,20) + '...' : item.target.split('/')[2]
+                                    item.target.split('/')[2].length > 20 ? item.target.split('/')[2].slice(0, 20) + '...' :
+                                        item.target.split('/')[2]
                             }}</a>
                         </div>
                     </div>
@@ -82,9 +83,10 @@ import { deleteShortened, getShortened } from '../../api/ShortenApi';
 import { onMounted, ref } from 'vue';
 import CustomModal from '../Modals/CustomModal.vue';
 import { useToastStore } from '../../stores/ToastStore';
+import { computed } from '@vue/reactivity';
 
 const toastStore = useToastStore()
-const searchInput = ref(null);
+const searchInput = ref('');
 const searchRef = ref(null);
 const shortenedList = ref([]);
 
@@ -128,6 +130,10 @@ const copyToClipBoard = (item) => {
     navigator.clipboard.writeText(item)
 }
 
+const filteredShortened = computed(() => {
+    return shortenedList.value.filter((shortened) => shortened.name.toLowerCase().includes(searchInput.value) || shortened.source.toLowerCase().includes(searchInput.value) || shortened.target.toLowerCase().includes(searchInput.value));
+})
+
 onMounted(async () => {
     document.addEventListener('keydown', (event) => {
         if (event.metaKey) {
@@ -139,5 +145,6 @@ onMounted(async () => {
         }
     });
     shortenedList.value = await (await getShortened()).shortened
+    console.log(shortenedList.value);
 })
 </script>
