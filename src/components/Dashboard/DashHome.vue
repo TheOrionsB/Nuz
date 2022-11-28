@@ -159,7 +159,6 @@ const modalContent = {
 }
 
 const initiateDeleteModal = (toDelete) => {
-    console.log("true");
     const shortenIdx = currentShortenedList.value.findIndex((item) => item.source === toDelete);
     if (shortenIdx !== -1) {
         modalContent.source.value = toDelete;
@@ -179,7 +178,6 @@ const confirmLinkDeletion = async (source) => {
         toastStore.setSuccess("Link deleted!")
     } else {
         toastStore.setError("An error occurred while deleting the link");
-        console.log("error");
     }
 }
 
@@ -198,6 +196,5 @@ onBeforeMount(async () => {
     const hitHistory = await (await getHitHistory()).history.reverse();
     chartLabels.value = hitHistory.map((historyEntry) => historyEntry.label);
     chartDataSets.value = hitHistory.map((historyEntry) => { return (historyEntry.hitCount) });
-    console.log(chartLabels.value, chartDataSets.value)
 })
 </script>

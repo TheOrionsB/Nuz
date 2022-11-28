@@ -54,7 +54,6 @@ export const getBasicInfo = async () => {
 }
 
 export const updatePassword = async (oldPassword, newPassword) => {
-    // console.log(oldPassword, newPassword);
     const authStore = useAuthenticationStore();
     const response = await fetch(`${process.env.VUE_APP_API_ENDPOINT || process.env.VITE_APP_API_ENDPOINT}/user/${authStore.getUsername()}`, {
         method: "PUT",
