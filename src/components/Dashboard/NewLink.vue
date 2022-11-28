@@ -27,7 +27,7 @@
                             <input id="generatedUrlInput" v-model="formInputs.src.value" disabled
                                 class="max-lg:p-1 lg:p-2 bg-gray-900 w-2/3 bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-gray-200 border-opacity-50"
                                 type="text" />
-                            <button @click="console.log('nothing')"
+                            <button 
                                 class="rounded w-1/3 border-2 border-purple-200 border-opacity-50">
                                 Regen</button>
                         </span>

@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col h-full w-full overflow-y-scroll  lg:p-[5%] max-lg:space-y-1 lg:space-y-4">
-        <div class="space-y-1 flex flex-col self-start max-lg:p-[5%] max-lg:py-[2%]">
+    <div class="flex flex-col h-full w-full overflow-y-scroll  p-[5%] max-lg:space-y-1 lg:space-y-4">
+        <div class="space-y-1 flex flex-col self-start ">
             <h1 class="font-bold max-lg:text-2xl lg:text-4xl ">My links</h1>
             <p class="text-purple-300 max-lg:text-lg lg:text-2xl">Find every link you have registered. You can delete them, copy the link
                 in your clipboard and access the target link</p>
