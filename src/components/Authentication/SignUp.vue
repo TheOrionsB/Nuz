@@ -1,5 +1,5 @@
 <template>
-    <form class="flex flex-col p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 " @submit.prevent="registerUser">
+    <form class="flex flex-col  max-lg:p-3 lg:p-8 justify-center  w-4/6  bg-gray-500 bg-opacity-20 " @submit.prevent="registerUser">
         <span class="flex flex-col h-full justify-around space-y-4">
             <span class="flex flex-col space-y-2">
                 <label class="font-bold text-xl">Choose a username</label>
@@ -23,14 +23,14 @@
                 </div>
             </span>
             <span v-if="formInputs.username.value !== null" class="flex flex-col space-y-2">
-                <label class="font-bold text-xl">Find a strong password</label>
+                <label class="font-bold max-lg:text-lg lg:text-xl">Find a strong password</label>
                 <input @focus="isPasswordFocused = 'true'" @blur="isPasswordFocused = false"
                     v-model="formInputs.password.value"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="password" placeholder="Password" />
             </span>
             <span v-if="formInputs.password.value !== null" class="flex flex-col space-y-2">
-                <label class="font-bold text-xl">Confirm it...</label>
+                <label class="font-bold max-lg:text-lg lg:text-xl">Confirm it...</label>
                 <input @focus="isPasswordConfFocused = true" @blur="isPasswordConfFocused = false"
                     v-model="formInputs.passwordconf.value"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"

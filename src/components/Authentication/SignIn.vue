@@ -1,15 +1,15 @@
 <template>
-    <form class="flex flex-col p-8 justify-center w-4/6  bg-gray-500 bg-opacity-20 "
+    <form class="flex flex-col max-lg:p-3 lg:p-8 justify-center max-lg:3/6 w-4/6 bg-gray-500 bg-opacity-20 "
         @submit.prevent="authenticateUser">
         <span class="flex flex-col h-full justify-around space-y-4">
             <span class="flex flex-col space-y-2">
-                <label class="font-bold text-xl">Who are you ?</label>
+                <label class="font-bold max-lg:text-lg lg:text-xl">Who are you ?</label>
                 <input v-model="formInputs.username.value.content"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="text" placeholder="Username" />
             </span>
             <span v-if="formInputs.username.value.content" class="flex flex-col space-y-2">
-                <label class="font-bold text-xl">Hm, what's the code ?</label>
+                <label class="font-bold max-lg:text-lg lg:text-xl">Hm, what's the code ?</label>
                 <input v-model="formInputs.password.value"
                     class="p-2 bg-black bg-opacity-40 rounded bg-transparent text-purple-300 border-2 border-purple-200 border-opacity-50"
                     type="password" placeholder="Password" />
