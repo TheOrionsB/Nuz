@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-col pt-10 h-full space-y-10 mt-12 qhd:mt-12">
+    <div class="flex flex-col pt-10 h-full space-y-10 max-lg:mt-4 mt-12">
         <HeadingItemVue />
-        <div class="flex flex-col justify-start px-[5%] lg:flex lg:flex-row lg:justify-evenly">
+        <div class="flex flex-col justify-start px-[5%] max-lg:space-y-10 lg:flex lg:flex-row lg:justify-evenly">
             <SellingBulletsVue />
             <HomeCTAVue />
         </div>

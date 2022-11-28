@@ -92,9 +92,9 @@
             </div>
         </div>
         <div v-if="currentShortenedList.length === 0"
-            class="w-full h-full flex-col justify-center items-center relative top-[25%] text-center">
-            <h1 class="text-5xl font-extralight">Nothing to see here... Yet !</h1>
-            <p class="text-3xl font-extralight">Navigate to 'New link' to create your first link and have a summuary
+            class="flex flex-col h-full p-4">
+            <h1 class="max-lg:text-2xl lg:text-5xl font-extralight">Nothing to see here... Yet !</h1>
+            <p class="max-lg:text-lg lg:text-3xl">Navigate to 'New link' to create your first link and have a summuary
                 right here :)</p>
         </div>
         <CustomModal :visible="isModalVisible">
