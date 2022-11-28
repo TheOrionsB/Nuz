@@ -25,6 +25,7 @@
                     <h4 class="font-extralight">Account at risk:</h4>
                     <p class="text-purple-400">{{ info.data.hasRecoveryKey ? 'No' : 'Yes (no recovery key)' }}</p>
                 </span>
+                <button class="lg:hidden bg-red-700 text-white w-full my-2 hover:text-black p-1 px-2 hover:bg-red-300 rounded ease-in-out duration-200 text-lg" @click="callLogout()"><font-awesome-icon class="text-purple-300 text-inherit w-10" :icon="['fas', 'right-from-bracket']" />Log out</button>
             </div>
         </div>
         <div class="space-y-8">
@@ -106,6 +107,13 @@ const deleteActiveAccount = async () => {
         toastStore.setError("An error occurred while deleting your account");
     }
 }
+
+const callLogout = () => {
+    document.cookie = `username=${authStore.getUsername()};expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    document.cookie = `token=${authStore.getToken()};expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    authStore.logout();
+}
+
 
 const AccountActions = [
     { name: 'PasswordReset', component: EditPassword },
