@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full p-[5%] max-lg:space-y-3 lg:space-y-10">
+    <div class="w-full h-full p-[5%] max-lg:space-y-3 lg:space-y-10 overflow-y-scroll">
         <div class="space-y-1 flex flex-col ">
             <h1 class="font-bold max-lg:text-2xl lg:text-4xl ">Create a new link</h1>
             <p class="text-purple-300  max-lg:text-lg lg:text-2xl">If you don't want your link to expire or to be password protected, leave their
@@ -94,7 +94,7 @@ const createLink = async () => {
     if (result.success) {
         isLinkCreating.value = false;
         toastStore.setSuccess("Link created successfully !")
-        router.push({ path: '/dashboard' })
+        router.push({ path: '/dash' })
     } else {
         toastStore.setError("An error occurred while creating the link");
         isLinkCreating.value = false;

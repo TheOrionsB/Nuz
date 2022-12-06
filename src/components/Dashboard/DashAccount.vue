@@ -4,7 +4,7 @@
             <div class="px-8 w-1/2 max-lg:hidden">
                 <span class="flex flex-row space-x-2">
                     <h2 class="text-5xl font-extralight">Account: </h2>
-                    <h2 class="text-5xl font-extralight  text-purple-400">{{ authStore.getUsername() }}</h2>
+                    <h2 class="text-5xl font-extralight  text-purple-400">{{ info.data.username }}</h2>
                 </span>
                 <h3 class="text-2xl font-extralight">This is you :)</h3>
             </div>
